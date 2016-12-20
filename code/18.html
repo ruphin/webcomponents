@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+
+<my-super-element></my-super-element>
+
+<template id="my-super-element-template">
+  <h1>Moving data up</h1>
+  <my-element id="innerElement"></my-element>
+  <p>Outer element: <span id="count"></span> clicks</p>
+  <button id="button" type="button">Outer Button</button>
+  <style>
+    :host {
+      display: inline-block;
+      background: cornflowerblue;
+      padding: 5px;
+    }
+  </style>
+</template>
+
+<template id="my-element-template">
+  <p>Inner element: <span id="count"></span> clicks</p>
+  <button id="button" type="button">Inner Button</button>
+  <style>
+    :host {
+      display: block;
+      background: navajowhite;
+      padding: 5px;
+      margin-bottom: 5px;
+    }
+  </style>
+</template>
+
+<script>
+class MyElement extends HTMLElement {
+  static get is() {
+    return 'my-element';
+  }
+  constructor() {
+    super();
+    this._attachTemplate();
+    this._createElementCache();
+    this.count = 0;
+    this.$.button.onclick = () => { this.count = this.count + 1; };
+  }
+  static get observedAttributes() {
+    return ['count'];
+  }
+  attributeChangedCallback(attribute, oldValue, newValue) {
+    if (newValue != this[attribute]) {
+      this[attribute] = parseInt(newValue);
+    }
+  }
+  // Whenever our properties change, we want to inform our parents
+  set count(value) {
+    // We need this guard to make sure we don't keep updating eachother
+    if (value === this._count) return;
+    this._count = value;
+    this.$.count.textContent = value;
+    this.setAttribute('count', value);
+    // Use events to push data changes up. It is a good convention
+    // to dispatch an event like this for all property changes,
+    // And leave our parent to decide if they want to act on it.
+    this.dispatchEvent(new CustomEvent('count-changed', {
+      detail: { count: value }, bubbles: false
+    }));
+  }
+  get count() {
+    return this._count;
+  }
+  _attachTemplate() {
+    let template = document.getElementById(`${this.constructor.is}-template`);
+    let content = template.content.cloneNode(true);
+    this.attachShadow({mode: 'open'});
+    this.shadowRoot.appendChild(content);
+  }
+  _createElementCache() {
+    this.$ = {};
+    this.shadowRoot.querySelectorAll('*').forEach((element) => {
+      if (element.id) {
+        this.$[element.id] = element;
+      }
+    });
+  }
+}
+
+class MySuperElement extends MyElement {
+  static get is() {
+    return 'my-super-element';
+  }
+  // Extend the connectedCallback
+  constructor() {
+    // Always call super() first in the constructor
+    // This makes sure the constructor in MyElement sets things up
+    super();
+    // Listen to count-changed events from our inner MyElement
+    this.$.innerElement.addEventListener('count-changed',
+      // All we have to do is update our count
+      (e) => this.count = e.detail.count
+    );
+  }
+
+  set count(value) {
+    // We need this guard to make sure we don't keep updating eachother
+    if (value === this._count) return;
+    this._count = value;
+    this.$.count.textContent = value;
+    this.setAttribute('count', value);
+    this.$.innerElement.count = value;
+  }
+  get count() {
+    return this._count;
+  }
+}
+
+customElements.define(MyElement.is, MyElement);
+customElements.define(MySuperElement.is, MySuperElement);
+</script>

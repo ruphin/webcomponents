@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+
+<my-element blue></my-element>
+
+<template id="my-element-template">
+  <h1>Some more styling</h1>
+  <p>We can use <code>:host</code> to style our element</p>
+  <style>
+    :host { /* The ':host' is the element itself */
+      display: inline-block; /* The display value is 'inline' by default */
+      padding-left: 5px;
+      padding-right: 5px;
+      overflow: auto;
+    }
+    :host(:hover) { /* Modifiers to the :host are in parentheses */
+      background: skyblue;
+    }
+    :host([blue]) { /* Same with attributes */
+      background: deepskyblue;
+    }
+    :host([blue]) p { /* Nested selectors work as normal */
+      color: #002dff;
+    }
+  </style>
+</template>
+
+<script>
+class MyElement extends HTMLElement {
+  constructor() {
+    super();
+    let template = document.getElementById('my-element-template');
+    let content = template.content.cloneNode(true);
+    this.attachShadow({mode: 'open'});
+    this.shadowRoot.appendChild(content);
+  }
+}
+
+customElements.define('my-element', MyElement);
+</script>

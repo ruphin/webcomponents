@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+
+<!-- We want to apply all changes to the count attribute, even after initialization -->
+<my-element count="5"></my-element>
+
+<template id="my-element-template">
+  <h1>We can observe attribute changes</h1>
+  <p>Clicked <span id="count"></span> times</p>
+  <button id="button" type="button">Click me</button>
+</template>
+
+<script>
+class MyElement extends HTMLElement {
+  constructor() {
+    super();
+    this._attachTemplate();
+    this._createElementCache();
+    this.count = 0;
+    this.$.button.onclick = () => { this.count = this.count + 1; };
+  }
+  // Define a static class property that tells defines what attributes we want to watch
+  static get observedAttributes() {
+    // Return an array of attribute names
+    return ['count'];
+  }
+  // This is called when any of the observed attributes are changed
+  // That includes when the attribute is initially set (no more need for attachedCallback!)
+  attributeChangedCallback(attribute, oldValue, newValue) {
+    // We only have to do something if the attribute is different from our property
+    if (newValue != this[attribute]) {
+      // Remember that attributes are Strings, so we may have to typecast
+      this[attribute] = parseInt(newValue);
+    }
+  }
+  set count(value) {
+    this._count = value;
+    this.$.count.textContent = value;
+  }
+  get count() {
+    return this._count;
+  }
+  _attachTemplate() {
+    let template = document.getElementById('my-element-template');
+    let content = template.content.cloneNode(true);
+    this.attachShadow({mode: 'open'});
+    this.shadowRoot.appendChild(content);
+  }
+  _createElementCache() {
+    this.$ = {};
+    this.shadowRoot.querySelectorAll('*').forEach((element) => {
+      if (element.id) {
+        this.$[element.id] = element;
+      }
+    });
+  }
+}
+
+customElements.define('my-element', MyElement);
+</script>
