@@ -339,7 +339,8 @@ export default class Presentation extends React.Component {
             ranges={[
               { loc: [0, 17], note: "We can also observe changes to our attribute"},
               { loc: [19, 22], note: "We have to tell the browser what attributes we want to observe"},
-              { loc: [19, 22], note: "createdCallback to the rescue! All we have to do is set the state"},
+              { loc: [22, 27], note: "If any of these attributes change, the browser calls this callback"},
+              { loc: [23, 24], note: "We check if the value is different from our property"},
               { loc: [0, 17], },
             ]}></CodeSlide>
 
