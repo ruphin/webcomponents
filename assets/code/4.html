@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+
+<my-element></my-element>
+
+<p>Our style is encapsulated! :)</p>
+
+<template id="my-element-template">
+  <h1>Styling</h1>
+  <p>If we use shadow DOM</p>
+  <style>
+    p {
+      color: red;
+    }
+  </style>
+</template>
+
+<script>
+class MyElement extends HTMLElement {
+  connectedCallback() {
+    let template = document.getElementById('my-element-template');
+    let content = template.content.cloneNode(true);
+    this.attachShadow({mode: 'open'});
+    this.shadowRoot.appendChild(content);
+  }
+}
+
+customElements.define('my-element', MyElement);
+</script>

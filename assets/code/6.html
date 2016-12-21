@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+
+<my-element my-attribute="Do not read attributes in the constructor"></my-element>
+
+<template id="my-element-template">
+  <h1>The Constructor</h1>
+</template>
+
+<script>
+class MyElement extends HTMLElement {
+  constructor() {
+    super();
+
+    let template = document.getElementById('my-element-template');
+    let content = template.content.cloneNode(true);
+    this.attachShadow({mode: 'open'});
+    this.shadowRoot.appendChild(content);
+
+    this.usage = "The constructor is a great place to set default properties"
+    let propertyElement = document.createElement('p');
+    propertyElement.innerText = this.usage;
+    this.shadowRoot.appendChild(propertyElement);
+  }
+  connectedCallback() {
+    let attributeString = this.getAttribute('my-attribute');
+    let attributeElement = document.createElement('p');
+    attributeElement.innerText = attributeString;
+    this.shadowRoot.appendChild(attributeElement);
+  }
+}
+
+customElements.define('my-element', MyElement);
+</script>

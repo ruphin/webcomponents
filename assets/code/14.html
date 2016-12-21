@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+
+<my-element>
+  <p>This element will not be rendered</p>
+</my-element>
+
+<template id="my-element-template">
+  <h1>Distributing child nodes</h1>
+  <p>An element with a shadowRoot does not display any child nodes</p>
+</template>
+
+<script>
+class MyElement extends HTMLElement {
+  constructor() {
+    super();
+    this._attachTemplate();
+  }
+  _attachTemplate() {
+    let template = document.getElementById('my-element-template');
+    let content = template.content.cloneNode(true);
+    this.attachShadow({mode: 'open'});
+    this.shadowRoot.appendChild(content);
+  }
+}
+
+customElements.define('my-element', MyElement);
+</script>

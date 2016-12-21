@@ -29,14 +29,22 @@ export default class Interactive extends Component {
     };
     return (
       <div>
-      {this.state.count < 5 ?
+      {this.state.count < 10 ?
         <div>
+          <Heading size={1} caps fit textColor="tertiary">
+            Thats real cool and all
+          </Heading>
           <Heading size={5} textColor="black">
-            The button has been clicked {this.state.count} times
+            But what about clicking stuff {this.state.count} times
           </Heading>
           <button style={styles} type="button" onClick={this.handleClick}>Click Me</button>
         </div> :
-          <Heading size={5} fit caps textColor="black">Easy there pal</Heading>
+        <div>
+          <Heading size={1} caps textColor="tertiary">Easy there pal</Heading>
+          <Heading size={1} caps textColor="black">
+            We got it the idea!
+          </Heading>
+        </div>
         }
       </div>
     );

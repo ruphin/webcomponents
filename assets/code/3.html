@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+
+<my-element></my-element>
+
+<p>But the style is leaking outside :(</p>
+
+<template id="my-element-template">
+  <h1>Styling</h1>
+  <p>We can style our element!</p>
+  <style>
+    p {
+      color: red;
+    }
+  </style>
+</template>
+
+<script>
+class MyElement extends HTMLElement {
+  connectedCallback() {
+    let template = document.getElementById('my-element-template');
+    let content = template.content.cloneNode(true);
+    this.appendChild(content);
+  }
+}
+
+customElements.define('my-element', MyElement);
+</script>

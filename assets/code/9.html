@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+
+<my-element></my-element>
+
+<template id="my-element-template">
+  <h1>State</h1>
+  <p>Properties should determine the state of our element</p>
+  <input type="checkbox" id="checkbox"></input>
+</template>
+
+<script>
+class MyElement extends HTMLElement {
+  constructor() {
+    super();
+    this._attachTemplate();
+    this._createElementCache();
+    this.checked = true;
+  }
+  set checked(value) {
+    this._checked = value;
+    this.$.checkbox.checked = value;
+  }
+  get checked() {
+    return this._checked;
+  }
+  _attachTemplate() {
+    let template = document.getElementById('my-element-template');
+    let content = template.content.cloneNode(true);
+    this.attachShadow({mode: 'open'});
+    this.shadowRoot.appendChild(content);
+  }
+  _createElementCache() {
+    this.$ = {};
+    this.shadowRoot.querySelectorAll('*').forEach((element) => {
+      if (element.id) {
+        this.$[element.id] = element;
+      }
+    });
+  }
+
+}
+
+customElements.define('my-element', MyElement);
+</script>

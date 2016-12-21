@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+
+<my-element>
+  <p>Distribute child nodes with <code>&lt;slot&gt;</code></p>
+</my-element>
+
+<template id="my-element-template">
+  <h1>Distributing child nodes</h1>
+  <slot></slot>
+</template>
+
+<script>
+class MyElement extends HTMLElement {
+  constructor() {
+    super();
+    this._attachTemplate();
+  }
+  _attachTemplate() {
+    let template = document.getElementById('my-element-template');
+    let content = template.content.cloneNode(true);
+    this.attachShadow({mode: 'open'});
+    this.shadowRoot.appendChild(content);
+  }
+}
+
+customElements.define('my-element', MyElement);
+</script>

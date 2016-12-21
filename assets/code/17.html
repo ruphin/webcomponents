@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+
+<!-- We only have <my-super-element> -->
+<my-super-element></my-super-element>
+
+<template id="my-super-element-template">
+  <h1>Inheritance and Nesting</h1>
+  <p>Outer element: <span id="count"></span> clicks</p>
+  <button id="button" type="button">Outer Button</button>
+  <span>The outer element updates the inner element</span>
+  <my-element id="innerElement"></my-element>
+  <style>
+    :host {
+      display: inline-block;
+      background: cornflowerblue;
+      padding: 5px;
+    }
+    :host > span{
+      color: darkred;
+    }
+  </style>
+</template>
+
+<template id="my-element-template">
+  <p>Inner element: <span id="count"></span> clicks</p>
+  <button id="button" type="button">Inner Button</button>
+  <span>But the inner element does not update the outer element</span>
+  <style>
+    :host {
+      display: block;
+      background: navajowhite;
+      padding: 5px;
+      margin-top: 5px;
+    }
+    :host > span{
+      color: firebrick;
+    }
+  </style>
+</template>
+
+<script>
+class MyElement extends HTMLElement {
+  static get is() {
+    return 'my-element';
+  }
+  constructor() {
+    super();
+    this._attachTemplate();
+    this._createElementCache();
+    this.count = 0;
+    this.$.button.onclick = () => { this.count = this.count + 1; };
+  }
+  static get observedAttributes() {
+    return ['count'];
+  }
+  attributeChangedCallback(attribute, oldValue, newValue) {
+    if (newValue != this[attribute]) {
+      this[attribute] = parseInt(newValue);
+    }
+  }
+  set count(value) {
+    this._count = value;
+    this.$.count.textContent = value;
+    this.setAttribute('count', value);
+  }
+  get count() {
+    return this._count;
+  }
+  _attachTemplate() {
+    let template = document.getElementById(`${this.constructor.is}-template`);
+    let content = template.content.cloneNode(true);
+    this.attachShadow({mode: 'open'});
+    this.shadowRoot.appendChild(content);
+  }
+  _createElementCache() {
+    this.$ = {};
+    this.shadowRoot.querySelectorAll('*').forEach((element) => {
+      if (element.id) {
+        this.$[element.id] = element;
+      }
+    });
+  }
+}
+
+class MySuperElement extends MyElement {
+  static get is() {
+    return 'my-super-element';
+  }
+  set count(value) {
+  this._count = value;
+    this.$.count.textContent = value;
+    this.setAttribute('count', value);
+    this.$.innerElement.count = value;
+  }
+  get count() {
+    return this._count;
+  }
+}
+
+customElements.define(MyElement.is, MyElement);
+customElements.define(MySuperElement.is, MySuperElement);
+</script>

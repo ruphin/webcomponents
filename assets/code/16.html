@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+
+<my-element>
+  <p>Text without a <code>&lt;slot&gt;</code> attribute</p>
+  <button type="button" slot="myButton">A button</button>
+  <p slot="myText">This is inserted in the <code>myText</code> slot</p>
+  <button type="button" slot="myButton">An other button</button>
+</my-element>
+
+<template id="my-element-template">
+  <slot name="myHeader">
+    <h1>Distributing and styling named nodes</h1>
+  </slot>
+  <slot name="myText">
+    <p>This fallback text will not be rendered</p>
+  </slot>
+  <div>
+    <p><strong>These were in the myButton slot:</strong></p>
+    <slot name="myButton"></slot>
+  </div>
+  <p><strong>Remaining elements:</strong></p>
+  <slot></slot>
+  <style>
+    ::slotted(p) {
+      color: crimson;
+    }
+    ::slotted(p code),
+    ::slotted(p) code {
+      color: forestgreen;
+    }
+    ::slotted(h1) {
+      color: crimson;
+    }
+    h1 {
+      color: forestgreen;
+    }
+  </style>
+</template>
+
+<script>
+class MyElement extends HTMLElement {
+  constructor() {
+    super();
+    this._attachTemplate();
+  }
+  _attachTemplate() {
+    let template = document.getElementById('my-element-template');
+    let content = template.content.cloneNode(true);
+    this.attachShadow({mode: 'open'});
+    this.shadowRoot.appendChild(content);
+  }
+}
+
+customElements.define('my-element', MyElement);
+</script>

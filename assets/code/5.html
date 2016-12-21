@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+
+<my-element my-attribute="Attributes can only be strings"></my-element>
+
+<template id="my-element-template">
+  <h1>Properties and Attributes</h1>
+  <p>Properties are instance variables on your Element's instance</p>
+  <p>Attributes are part of the DOM and not directly an instance variable of your Element</p>
+</template>
+
+<script>
+class MyElement extends HTMLElement {
+  connectedCallback() {
+    let template = document.getElementById('my-element-template');
+    let content = template.content.cloneNode(true);
+    this.attachShadow({mode: 'open'});
+    this.shadowRoot.appendChild(content);
+
+    let attributeString = this.getAttribute('my-attribute');
+    this.setAttribute('attribute-name', 'Some value');
+    let attributeElement = document.createElement('p');
+    attributeElement.innerText = attributeString;
+    this.shadowRoot.appendChild(attributeElement);
+
+
+    this.prop = { text: 'Properties can be anything!' };
+    let propertyElement = document.createElement('p');
+    propertyElement.innerText = this.prop.text;
+    this.shadowRoot.appendChild(propertyElement);
+  }
+}
+
+customElements.define('my-element', MyElement);
+</script>

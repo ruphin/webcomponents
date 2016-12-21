@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+
+<my-element count="5"></my-element>
+
+<template id="my-element-template">
+  <h1>Use attributes for initial configuration</h1>
+  <p>Clicked <span id="count"></span> times</p>
+  <button id="button" type="button">Click me</button>
+</template>
+
+<script>
+class MyElement extends HTMLElement {
+  constructor() {
+    super();
+    this._attachTemplate();
+    this._createElementCache();
+    this.count = 0;
+    this.$.button.onclick = () => { this.count = this.count + 1; };
+  }
+  connectedCallback() {
+    this.count = parseInt(this.getAttribute('count')) || 0;
+  }
+  set count(value) {
+    this._count = value;
+    this.$.count.textContent = value;
+  }
+  get count() {
+    return this._count;
+  }
+  _attachTemplate() {
+    let template = document.getElementById('my-element-template');
+    let content = template.content.cloneNode(true);
+    this.attachShadow({mode: 'open'});
+    this.shadowRoot.appendChild(content);
+  }
+  _createElementCache() {
+    this.$ = {};
+    this.shadowRoot.querySelectorAll('*').forEach((element) => {
+      if (element.id) {
+        this.$[element.id] = element;
+      }
+    });
+  }
+}
+
+customElements.define('my-element', MyElement);
+</script>

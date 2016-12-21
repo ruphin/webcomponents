@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+
+<my-element></my-element>
+
+<script>
+class MyElement extends HTMLElement {
+  connectedCallback() {
+    this.innerHTML = "<h1>Hello!</h1><p>I am a custom element</p>";
+  }
+}
+
+customElements.define('my-element', MyElement);
+</script>
