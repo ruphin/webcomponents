@@ -136,7 +136,7 @@ export default class Presentation extends React.Component {
             lang="html"
             code={require("raw!../assets/code/1.html")}
             ranges={[
-              { loc: [0, 13], note: "Let's go!"},
+              { loc: [0, 13], note: "Use Up and Down keys to navigate code slides"},
               { loc: [0, 1], note: "Standard HTML"},
               { loc: [2, 3], note: "Use our element" },
               { loc: [4, 13], note: "That's it for the HTML, only Script left" },
