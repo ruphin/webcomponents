@@ -1,21 +1,13 @@
-# Spectacle Boilerplate
+# Web Component Course and accompanying presentation
 
-## Reference
+## Course
 
-The Spectacle core API is available at [https://github.com/FormidableLabs/spectacle/blob/master/README.markdown](https://github.com/FormidableLabs/spectacle/blob/master/README.markdown).
+This project contains a little course on the WebComponent v1 specification.
 
-## Development
+In the 'course' directory you will find 18 HTML files, each with a small lesson introducing a new concept. The lessons come in the form of comments and other explanatory texts in the source code. Simply open the files in a v1 compliant browser (Chrome or Opera) to see the results.
 
-After downloading the boilerplate, your first order of business is to open terminal and run `npm install`
+If you have any comments or suggestions regarding the contents of the course, please create an issue on this repository, or send me a message directly.
 
-Next, run `rm -R .git` to remove the existing version control.
+## Presentation
 
-Then, to start up the local server, run `npm start`
-
-Open a browser and hit [http://localhost:3000](http://localhost:3000), and we are ready to roll
-
-## Build & Deployment
-
-Building the dist version of the project is as easy as running `npm run build`
-
-If you want to deploy the slideshow to surge, run `npm run deploy`
+The project also contains a small presentation on the subject. You can run the presentation with `make` (or `make docker` if you have docker), or `npm install && npm start`
