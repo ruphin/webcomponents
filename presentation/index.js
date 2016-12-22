@@ -45,6 +45,7 @@ const images = {
   browsers: require("../assets/browsers.gif"),
   how: require("../assets/how.gif"),
   shadow: require("../assets/shadow.gif"),
+  dataflow: require("../assets/dataflow.jpg"),
   glory: require("../assets/glory.gif"),
   holdOn: require("../assets/hold-on.gif")
 };
@@ -173,8 +174,8 @@ export default class Presentation extends React.Component {
             lang="html"
             code={require("raw!../assets/code/3.html")}
             ranges={[
-              { loc: [0, 16], },
-              { loc: [9, 14], note: "Styling is easy" },
+              { loc: [0, 16], note: "Styling is easy"},
+              { loc: [9, 14], note: "Use normal CSS" },
               { loc: [6, 15], note: "We just use a <style> tag in our Template" },
               { loc: [17, 29], note: "No other changes" },
               { loc: [2, 5], note: "But it's not perfect" },
@@ -231,8 +232,8 @@ export default class Presentation extends React.Component {
               { loc: [10, 12], note: "The constructor has a few rules. The first one: always call super() first"},
               { loc: [10, 17], note: "We can use the constructor to set up some basics like creating our shadowRoot"},
               { loc: [10, 19], note: "Or setting initial properties"},
-              { loc: [23, 29], note: "But remember: when the constructor runs we are not attached to the DOM yet"},
-              { loc: [23, 29], note: "This means you CANNOT manipulate your children and you CANNOT read or write your attributes"},
+              { loc: [10, 19], note: "But remember: when the constructor runs we are not attached to the DOM yet"},
+              { loc: [10, 19], note: "This means you CANNOT manipulate your children and you CANNOT read or write your attributes"},
               { loc: [23, 29], note: "So do those things in the attachedCallback"},
             ]}></CodeSlide>
 
@@ -345,55 +346,70 @@ export default class Presentation extends React.Component {
             ]}></CodeSlide>
 
 
+          <CodeSlide
+            maxWidth="95vw"
+            maxHeight="90vh"
+            padding="0"
+            transition={["slide"]}
+            lang="html"
+            code={require("raw!../assets/code/15.html")}
+            ranges={[
+              { loc: [0, 17], note: "Distributing child nodes"},
+              { loc: [2, 5], note: "Sometimes we want our elements to carry child nodes"},
+              { loc: [6, 10], note: "To insert child nodes, use <slot> in the Template"},
+              { loc: [2, 10], note: "The content in our element is mounted in the <slot> in our Template"},
+              { loc: [0, 17], },
+            ]}></CodeSlide>
 
 
+          <Slide transition={["spin", "slide"]} bgColor="black">
+            <Heading size={1} caps fit textColor="primary">
+              Do Dataflow like Dodson
+            </Heading>
+            <Image src={images.dataflow.replace("/", "")} width="80%" />
+          </Slide>
 
 
+          <CodeSlide
+            maxWidth="95vw"
+            maxHeight="90vh"
+            padding="0"
+            transition={["slide"]}
+            lang="html"
+            code={require("raw!../assets/code/18.html")}
+            ranges={[
+              { loc: [0, 17], note: "Two nested elements"},
+              { loc: [51, 60], note: "When a property is set, update our bindings, reflect to our attribute, and fire an event"},
+              { loc: [83, 89], note: "Elements listen to events fired by children, and update their own state if needed"},
+              { loc: [0, 17], },
+            ]}></CodeSlide>
 
 
           <Slide transition={["slide"]} bgColor="black">
+            <Heading size={1} caps fit textColor="primary">
+              Now you have the power!
+            </Heading>
             <Image src={images.glory.replace("/", "")} width="100%" />
           </Slide>
 
 
+          <Slide transition={["spin", "slide"]} bgColor="primary">
+            <Heading size={1} caps fit lineHeight={1.5} textColor="secondary">
+              Thank you!
+            </Heading>
 
-          <Slide transition={["zoom", "fade"]} bgColor="primary">
-            <Heading caps fit>Flexible Layouts</Heading>
-            <Layout>
-              <Fill>
-                <Heading size={4} caps textColor="secondary" bgColor="white" margin={10}>
-                  Left
-                </Heading>
-              </Fill>
-              <Fill>
-                <Heading size={4} caps textColor="secondary" bgColor="white" margin={10}>
-                  Right
-                </Heading>
-              </Fill>
-            </Layout>
-          </Slide>
-          <Slide transition={["slide"]} bgColor="black">
-            <BlockQuote>
-              <Quote>Wonderfully formatted quotes</Quote>
-              <Cite>Ken Wheeler</Cite>
-            </BlockQuote>
-          </Slide>
-          <Slide transition={["slide", "spin"]} bgColor="primary">
-            <Heading caps fit size={1} textColor="tertiary">
-              Smooth
+            <Heading size={1} caps textColor="tertiary">
+              Goffert van Gool
             </Heading>
-            <Heading caps fit size={1} textColor="secondary">
-              Combinable Transitions
+            <Heading size={1} lineHeight={1.5} caps textColor="tertiary">
+              @ruphin_
             </Heading>
-          </Slide>
-          <Slide transition={["slide"]} bgColor="primary">
-            <Interactive/>
-          </Slide>
-          <Slide transition={["spin", "slide"]} bgColor="tertiary">
-            <Heading size={1} caps fit lineHeight={1.5} textColor="primary">
-              Made with love in Seattle by
+            <Heading textSize="150%" caps lineHeight={1} textColor="secondary">
+              Find these slides and the full course at
             </Heading>
-            <Link href="http://www.formidablelabs.com"><Image width="100%" src={images.glory}/></Link>
+              <Link textSize="150%" bold caps textColor="tertiary" href="http://www.github.com/ruphin/web-component-course">
+                github.com/ruphin/web-component-course
+              </Link>
           </Slide>
         </Deck>
       </Spectacle>
