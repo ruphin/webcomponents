@@ -234,7 +234,7 @@ export default class Presentation extends React.Component {
               { loc: [10, 19], note: "Or setting initial properties"},
               { loc: [10, 19], note: "But remember: when the constructor runs we are not attached to the DOM yet"},
               { loc: [10, 19], note: "This means you CANNOT manipulate your children and you CANNOT read or write your attributes"},
-              { loc: [23, 29], note: "So do those things in the attachedCallback"},
+              { loc: [23, 29], note: "So do those things in the connectedCallback"},
             ]}></CodeSlide>
 
           <CodeSlide
@@ -326,7 +326,7 @@ export default class Presentation extends React.Component {
             ranges={[
               { loc: [0, 17], note: "Attributes are useful to semantically set our initial state"},
               { loc: [2, 3], note: "We want our element to be configurable from HTML"},
-              { loc: [19, 22], note: "createdCallback to the rescue! All we have to do is set the state"},
+              { loc: [19, 22], note: "connectedCallback to the rescue! All we have to do is set the state"},
               { loc: [0, 17], },
             ]}></CodeSlide>
 

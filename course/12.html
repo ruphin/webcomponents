@@ -24,7 +24,7 @@ class MyElement extends HTMLElement {
     return ['count'];
   }
   // This is called when any of the observed attributes are changed
-  // That includes when the attribute is initially set (no more need for attachedCallback!)
+  // That includes when the attribute is initially set (no more need for connectedCallback!)
   attributeChangedCallback(attribute, oldValue, newValue) {
     // We only have to do something if the attribute is different from our property
     if (newValue != this[attribute]) {
