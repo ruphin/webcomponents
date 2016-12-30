@@ -1,0 +1,32 @@
+<link rel="import" href="./custom-html-element.html">
+
+<template id="component-tutorial-sidenav-template">
+
+  <div>
+    Navigation here
+  </div>
+
+  <style>
+    :host {
+      display: block;
+      width: 256px;
+      border-right: 1px solid rgba(0,0,0,.14);
+    }
+  </style>
+</template>
+
+<script>
+{
+  let doc = document.currentScript.ownerDocument
+  class ComponentTutorialSidenav extends CustomHTMLElement {
+    static get is() {
+      return 'component-tutorial-sidenav';
+    }
+    static get _document() {
+      return doc;
+    }
+  }
+
+  customElements.define(ComponentTutorialSidenav.is, ComponentTutorialSidenav);
+}
+</script>

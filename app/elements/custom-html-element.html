@@ -1,0 +1,23 @@
+
+<script>
+class CustomHTMLElement extends HTMLElement {
+  constructor() {
+    super();
+    this._attachTemplate();
+    this._createElementCache();
+  }
+  _attachTemplate() {
+    let content = this.constructor._document.getElementById(`${this.constructor.is}-template`).content.cloneNode(true);
+    this.attachShadow({mode: 'open'});
+    this.shadowRoot.appendChild(content);
+  }
+  _createElementCache() {
+    this.$ = {};
+    this.shadowRoot.querySelectorAll('*').forEach((element) => {
+      if (element.id) {
+        this.$[element.id] = element;
+      }
+    });
+  }
+}
+</script>

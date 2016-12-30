@@ -1,6 +1,17 @@
 <!DOCTYPE html>
+<link rel="import" href="elements/component-tutorial-page.html">
 <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js?autoload=true&amp;skin=sunburst&amp;lang=css" defer="defer"></script>
-<p>
+<style>
+  body {
+    margin: 0;
+  }
+</style>
+<component-tutorial-page>
+  <h1 slot="header-title">Test Page</h1>
+  <p>Dat content</p>
+</component-tutorial-page>
+
+<!-- <p>
   All the code
 </p>
 <pre class="prettyprint" id="all" style="border:4px solid #88c"></pre>
@@ -43,4 +54,4 @@ customElements.define('my-element', MyElement);
     document.getElementById("first").innerHTML = codeSnippet.slice(2,3).join('\n');
     document.getElementById("second").innerHTML = codeSnippet.slice(5,15).join('\n');
   }
-</script>
+</script> -->

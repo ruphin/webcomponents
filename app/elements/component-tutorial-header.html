@@ -1,0 +1,41 @@
+<link rel="import" href="./custom-html-element.html">
+
+<template id="component-tutorial-header-template">
+
+  <slot name="title"></slot>
+
+  <style>
+    :host {
+      display: flex;
+      flex-flow: row;
+      align-items: center;
+      padding-left: 30px;
+      height: 64px;
+      background-color: var(--header-color, #512DA8);
+      box-shadow: 0 2px 5px rgba(0,0,0,.26);
+    }
+
+    :host slot[name="title"]::slotted(h1) {
+      font-size: 18px;
+      font-family: sans-serif;
+      font-weight: normal;
+      color: white;
+      margin: 0;
+    }
+  </style>
+</template>
+
+<script>
+{
+  let doc = document.currentScript.ownerDocument
+  class ComponentTutorialHeader extends CustomHTMLElement {
+    static get is() {
+      return 'component-tutorial-header';
+    }
+    static get _document() {
+      return doc;
+    }
+  }
+  customElements.define(ComponentTutorialHeader.is, ComponentTutorialHeader);
+}
+</script>

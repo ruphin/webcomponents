@@ -1,0 +1,44 @@
+<link rel="import" href="./custom-html-element.html">
+<link rel="import" href="./component-tutorial-header.html">
+<link rel="import" href="./component-tutorial-sidenav.html">
+
+<template id="component-tutorial-page-template">
+  <component-tutorial-sidenav></component-tutorial-sidenav>
+  <div class="main-panel">
+    <component-tutorial-header>
+      <slot name="header-title" slot="title"></slot>
+    </component-tutorial-header>
+    <slot></slot>
+  </div>
+
+  <style>
+    :host {
+      display: flex;
+      flex-flow: row;
+      align-items: stretch;
+      height: 100vh;
+      width: 100vw;
+    }
+
+    :host .main-panel {
+      flex-grow: 1;
+      background-color: #fafafa;
+    }
+  </style>
+</template>
+
+<script>
+{
+  let doc = document.currentScript.ownerDocument
+  class ComponentTutorialPage extends CustomHTMLElement {
+    static get is() {
+      return 'component-tutorial-page';
+    }
+    static get _document() {
+      return doc;
+    }
+  }
+
+  customElements.define(ComponentTutorialPage.is, ComponentTutorialPage);
+}
+</script>
