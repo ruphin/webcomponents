@@ -1,15 +1,141 @@
 <link rel="import" href="./custom-html-element.html">
 
 <template id="component-tutorial-sidenav-template">
-  <div>
-    Totally a menu
+  <div class="ident">
+    Web Components
   </div>
+  <nav>
+    <dl collapsed>
+      <dt tabindex="0">Lessons</dt>
+      <div class="wrapper">
+        <dd>
+          <a href="/components/lessons/00.html">0: Introduction</a>
+          <a href="/components/lessons/01.html">1: Custom Element</a>
+          <a href="/components/lessons/02.html">2: Templates</a>
+          <a href="/components/lessons/03.html">3: Style</a>
+          <a href="/components/lessons/04.html">4: Shadow DOM</a>
+          <a href="/components/lessons/05.html">5: Properties and Attributes</a>
+        </dd>
+      </div>
+    </dl>
 
+    <dl collapsed>
+      <dt tabindex="0">Articles</dt>
+      <div class="wrapper">
+        <dd>
+        <a href="#">None yet!</a>
+        </dd>
+      </div>
+    </dl>
+
+    <dl collapsed>
+      <dt tabindex="0">References</dt>
+      <div class="wrapper">
+        <dd>
+        <a href="#">None yet!</a>
+        </dd>
+      </div>
+    </dl>
+
+    <dl collapsed>
+      <dt tabindex="0">Links</dt>
+      <div class="wrapper">
+        <dd>
+        <a href="overwebs.ruph.in">Overwebs</a>
+        </dd>
+      </div>
+    </dl>
+  </nav>
+  <div class="footer">
+    <div class="legal">Ruphin ©</div>
+    <div class="resources">
+      <a href="https://github.com/ruphin/web-component-course">Github</a>
+      <a href="mailto:ruphin@ruphin.net">Contact</a>
+    </div>
+  </div>
   <style>
-    :host .drawer {
+    :host {
       display: flex;
       flex-flow: column;
       align-items: stretch;
+      font-family: sans-serif;
+    }
+    .ident {
+      display: flex;
+      align-items: center;
+      padding-left: 26px;
+      font-family: sans-serif;
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      height: var(--header-height, 56px);
+      margin-bottom: 8px;
+      border-bottom: 1px solid rgba(0,0,0,0.12);
+    }
+    nav {
+      font-size: 13px;
+      padding-top: 8px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid rgba(0,0,0,0.12);
+    }
+    dl {
+      margin: 0;
+    }
+    dt {
+      display: flex;
+      align-items: center;
+      height: 48px;
+      padding-left: 26px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    dt:focus {
+      background-color: #eee;
+    }
+
+    dl[collapsed] dd {
+      margin-top: -100%;
+      padding: 0;
+    }
+    .wrapper {
+      overflow: hidden;
+    }
+    dd {
+      display: flex;
+      flex-flow: column;
+      box-sizing: border-box;
+      margin: 0;
+      padding-bottom: 8px;
+      transition: margin ease-in-out 0.38s;
+      overflow: hidden;
+    }
+    dd > * {
+      height: 34px;
+      padding-left: 46px;
+    }
+    dd a {
+      display: flex;
+      align-items: center;
+      color: inherit;
+    }
+    a {
+      text-decoration: none;
+    }
+    .footer {
+      padding: 16px 8px 16px 26px;
+      font-size: 13px;
+    }
+
+    .footer > * {
+      height: 24px;
+      display: flex;
+      align-items: center;
+    }
+    .resources a {
+      color: rgb(2, 119, 187);
+    }
+    .resources a:not(:first-of-type) {
+      margin-left: 12px;
     }
   </style>
 </template>
@@ -23,6 +149,20 @@
     }
     static get _document() {
       return doc;
+    }
+    constructor() {
+      super();
+      Array.prototype.slice.call(this.shadowRoot.querySelectorAll('dt')).forEach( (e) => {
+        e.onclick = () => this._toggleMenu(e);
+      });
+    }
+    _toggleMenu(element) {
+      let menuGroup = element.parentElement;
+      if (menuGroup.hasAttribute('collapsed')) {
+        menuGroup.removeAttribute('collapsed');
+      } else {
+        menuGroup.setAttribute('collapsed', '');
+      }
     }
   }
 

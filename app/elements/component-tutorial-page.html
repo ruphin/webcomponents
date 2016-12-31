@@ -27,9 +27,37 @@
       background-color: #fafafa;
       height: 100%;
     }
+
     :host .main-panel .body {
       overflow-y: scroll;
-      height: calc(100% - 64px);
+      height: calc(100% - var(--header-height, 56px));
+    }
+
+    :host ::slotted(div.content) {
+      margin: auto;
+    }
+
+    :host ::slotted(div.content) {
+      width: 1160px;
+    }
+
+    @media(max-width: 1240px) {
+      :host ::slotted(div.content) {
+        width: 760px;
+      }
+    }
+
+    @media(max-width: 800px) {
+      :host ::slotted(div.content) {
+        width: 360px;
+      }
+    }
+
+    @media(max-width: 380px) {
+      :host ::slotted(div.content) {
+        margin: 0 16px;
+        width: auto;
+      }
     }
   </style>
 </template>

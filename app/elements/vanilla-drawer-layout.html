@@ -20,8 +20,11 @@
     .drawer {
       z-index: 2;
       width: 256px;
+      flex-shrink: 0;
       background: white;
       transition: transform ease-in-out 0.3s, margin ease-in-out 0.3s;
+      height: 100%;
+      overflow: auto;
     }
     #overlay {
       z-index: 1;
@@ -31,7 +34,7 @@
       left: 0;
       right: 0;
       pointer-events: none;
-      background-color: rgba(0, 0, 0, 0.3);
+      background-color: rgba(0,0,0,0.5);
       opacity: 0;
       transition: opacity ease-in-out 0.38s;
     }
@@ -45,16 +48,16 @@
       opacity: 1;
     }
 
-    @media(min-width: 1281px) {
+    @media(min-width: 1457px) {
       .drawer {
-        border-right: 1px solid rgba(0,0,0,.14);
+        border-right: 1px solid rgba(0,0,0,0.12);
       }
       #overlay {
         display: none;
       }
     }
 
-    @media(max-width: 1280px) {
+    @media(max-width: 1456px) {
       :host .backdrop {
         transition: opacity ease-in-out 0.38s, visibility ease-in-out 0.38s;
         background-color: rgba(0, 0, 0, 0.3);

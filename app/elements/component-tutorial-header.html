@@ -2,7 +2,11 @@
 
 <template id="component-tutorial-header-template">
 
-  <button type="button" name="button" id="open">Menu</button>
+  <button type="button" name="button" id="open">
+    <svg style="width:24px;height:24px" viewBox="0 0 24 24">
+      <path fill="#FFFFFF" d="M3,6H21V8H3V6M3,11H21V13H3V11M3,16H21V18H3V16Z" />
+    </svg>
+  </button>
   <slot name="title"></slot>
 
   <style>
@@ -10,22 +14,35 @@
       display: flex;
       flex-flow: row;
       align-items: center;
-      padding-left: 30px;
-      height: 64px;
+      height: var(--header-height, 56px);
       background-color: var(--header-color, #512DA8);
       box-shadow: 0 2px 5px rgba(0,0,0,.26);
     }
 
     :host slot[name="title"]::slotted(h1) {
       font-size: 18px;
+      letter-spacing: .6px;
       font-family: sans-serif;
       font-weight: normal;
       color: white;
       margin: 0;
     }
-    @media(min-width: 1281px) {
+    #open {
+      width: 48px;
+      height: 48px;
+      padding: 1px 6px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      margin-right: 4px;
+      margin-left: 4px;
+    }
+    @media(min-width: 1457px) {
       #open {
         display: none;
+      }
+      :host {
+        padding-left: 32px;
       }
     }
   </style>
