@@ -2,6 +2,7 @@
 
 <template id="component-tutorial-header-template">
 
+  <button type="button" name="button" id="open">Menu</button>
   <slot name="title"></slot>
 
   <style>
@@ -22,6 +23,11 @@
       color: white;
       margin: 0;
     }
+    @media(min-width: 1281px) {
+      #open {
+        display: none;
+      }
+    }
   </style>
 </template>
 
@@ -34,6 +40,13 @@
     }
     static get _document() {
       return doc;
+    }
+    connectedCallback() {
+      this.$.open.onclick = () => {
+        this.dispatchEvent(new CustomEvent('open-drawer', {
+          bubbles: true
+        }));
+      }
     }
   }
   customElements.define(ComponentTutorialHeader.is, ComponentTutorialHeader);

@@ -1,28 +1,35 @@
 <link rel="import" href="./custom-html-element.html">
 <link rel="import" href="./component-tutorial-header.html">
 <link rel="import" href="./component-tutorial-sidenav.html">
+<link rel="import" href="./vanilla-drawer-layout.html">
 
 <template id="component-tutorial-page-template">
-  <component-tutorial-sidenav></component-tutorial-sidenav>
-  <div class="main-panel">
-    <component-tutorial-header>
-      <slot name="header-title" slot="title"></slot>
-    </component-tutorial-header>
-    <slot></slot>
-  </div>
+  <vanilla-drawer-layout>
+    <component-tutorial-sidenav slot="drawer"></component-tutorial-sidenav>
+    <div class="main-panel">
+      <component-tutorial-header>
+        <slot name="header-title" slot="title"></slot>
+      </component-tutorial-header>
+      <div class="body">
+        <slot></slot>
+      </div>
+    </div>
+  </vanilla-drawer-layout>
 
   <style>
     :host {
-      display: flex;
-      flex-flow: row;
-      align-items: stretch;
+      display: block;
       height: 100vh;
       width: 100vw;
     }
 
     :host .main-panel {
-      flex-grow: 1;
       background-color: #fafafa;
+      height: 100%;
+    }
+    :host .main-panel .body {
+      overflow-y: scroll;
+      height: calc(100% - 64px);
     }
   </style>
 </template>

@@ -1,0 +1,114 @@
+<link rel="import" href="./custom-html-element.html">
+
+<template id="vanilla-drawer-layout-template">
+  <div class="drawer">
+    <slot name="drawer"></slot>
+  </div>
+  <div id="overlay"></div>
+  <div class="main">
+    <slot></slot>
+  </div>
+  <style>
+    :host {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-flow: row;
+      align-items: stretch;
+    }
+
+    .drawer {
+      z-index: 2;
+      width: 256px;
+      background: white;
+      transition: transform ease-in-out 0.3s, margin ease-in-out 0.3s;
+    }
+    #overlay {
+      z-index: 1;
+      position: fixed;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      pointer-events: none;
+      background-color: rgba(0, 0, 0, 0.3);
+      opacity: 0;
+      transition: opacity ease-in-out 0.38s;
+    }
+    .main {
+      z-index: 0;
+      flex-grow: 1;
+    }
+
+    :host([open]) #overlay {
+      pointer-events: auto;
+      opacity: 1;
+    }
+
+    @media(min-width: 1281px) {
+      .drawer {
+        border-right: 1px solid rgba(0,0,0,.14);
+      }
+      #overlay {
+        display: none;
+      }
+    }
+
+    @media(max-width: 1280px) {
+      :host .backdrop {
+        transition: opacity ease-in-out 0.38s, visibility ease-in-out 0.38s;
+        background-color: rgba(0, 0, 0, 0.3);
+
+      }
+
+      :host(:not([open])) .overlay {
+        pointer-events: none;
+      }
+
+      .drawer {
+        margin-left: -256px;
+      }
+
+
+      :host([open]) .drawer {
+        transform: translateX(100%);
+        box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.15);
+      }
+
+
+      :host[permanent] {
+        border-right: 1px solid rgba(0,0,0,.14);
+      }
+    }
+  </style>
+</template>
+
+<script>
+{
+  let doc = document.currentScript.ownerDocument
+  class VanillaDrawerLayout extends CustomHTMLElement {
+    static get is() {
+      return 'vanilla-drawer-layout';
+    }
+    static get _document() {
+      return doc;
+    }
+    constructor() {
+      super();
+      this.addEventListener('open-drawer', () => this.openDrawer());
+      this.addEventListener('close-drawer', () => this.closeDrawer());
+    }
+    connectedCallback() {
+      this.$.overlay.onclick = () => this.closeDrawer();
+    }
+    openDrawer() {
+      this.setAttribute('open', '');
+    }
+    closeDrawer() {
+      this.removeAttribute('open');
+    }
+  }
+
+  customElements.define(VanillaDrawerLayout.is, VanillaDrawerLayout);
+}
+</script>
