@@ -2,19 +2,32 @@
 
 <template id="component-tutorial-sidenav-template">
   <div class="ident">
-    Web Components
+    <a href="/">Web Components</a>
   </div>
   <nav>
     <dl collapsed>
       <dt tabindex="0">Lessons</dt>
       <div class="wrapper">
         <dd>
-          <a href="/components/lessons/00.html">0: Introduction</a>
-          <a href="/components/lessons/01.html">1: Custom Element</a>
+          <a href="/lessons/00.html">0: Introduction</a>
+          <a href="/lessons/01.html">1: Custom Element</a>
           <a href="/components/lessons/02.html">2: Templates</a>
           <a href="/components/lessons/03.html">3: Style</a>
           <a href="/components/lessons/04.html">4: Shadow DOM</a>
           <a href="/components/lessons/05.html">5: Properties and Attributes</a>
+          <a href="/components/lessons/06.html">6: The Constructor</a>
+          <a href="/components/lessons/07.html">7: Styling the Host Element</a>
+          <a href="/components/lessons/08.html">8: Internal ID lookup table</a>
+          <a href="/components/lessons/09.html">9: State</a>
+          <a href="/components/lessons/10.html">10: Simple data-binding</a>
+          <a href="/components/lessons/11.html">11: Attributes as initializers</a>
+          <a href="/components/lessons/12.html">12: Observing Attribute changes</a>
+          <a href="/components/lessons/13.html">13: Reflecting Properties to Attributes</a>
+          <a href="/components/lessons/14.html">14: ShadowRoot and child nodes</a>
+          <a href="/components/lessons/15.html">15: Distributing child nodes</a>
+          <a href="/components/lessons/16.html">16: Named child nodes</a>
+          <a href="/components/lessons/17.html">17: Inheritance and Nesting</a>
+          <a href="/components/lessons/18.html">18: Two-way dataflow</a>
         </dd>
       </div>
     </dl>
@@ -23,7 +36,7 @@
       <dt tabindex="0">Articles</dt>
       <div class="wrapper">
         <dd>
-        <a href="#">None yet!</a>
+        <a>None yet!</a>
         </dd>
       </div>
     </dl>
@@ -32,7 +45,7 @@
       <dt tabindex="0">References</dt>
       <div class="wrapper">
         <dd>
-        <a href="#">None yet!</a>
+        <a>None yet!</a>
         </dd>
       </div>
     </dl>
@@ -72,6 +85,10 @@
       margin-bottom: 8px;
       border-bottom: 1px solid rgba(0,0,0,0.12);
     }
+    .ident a {
+      color: inherit;
+      line-height: 40px;
+    }
     nav {
       font-size: 13px;
       padding-top: 8px;
@@ -81,6 +98,7 @@
     dl {
       margin: 0;
     }
+
     dt {
       display: flex;
       align-items: center;
@@ -90,28 +108,26 @@
       cursor: pointer;
     }
     dt:focus {
-      background-color: #eee;
+      background-color: #eeeeee;
     }
 
     dl[collapsed] dd {
-      margin-top: -100%;
-      padding: 0;
+      margin-top: -10000px;
     }
-    .wrapper {
+    dl[initialized] dd {
+      transition: margin ease-out 0.2s;
+    }
+    dl .wrapper {
       overflow: hidden;
     }
     dd {
-      display: flex;
-      flex-flow: column;
       box-sizing: border-box;
-      margin: 0;
+      margin-left: 0;
       padding-bottom: 8px;
-      transition: margin ease-in-out 0.38s;
-      overflow: hidden;
     }
     dd > * {
       height: 34px;
-      padding-left: 46px;
+      padding-left: 36px;
     }
     dd a {
       display: flex;
@@ -152,16 +168,41 @@
     }
     constructor() {
       super();
-      Array.prototype.slice.call(this.shadowRoot.querySelectorAll('dt')).forEach( (e) => {
-        e.onclick = () => this._toggleMenu(e);
-      });
+      this._initializeMenu();
     }
-    _toggleMenu(element) {
-      let menuGroup = element.parentElement;
+    _initializeMenu() {
+      // The setTimeout here is to make sure we do a layout before the initialization
+      window.setTimeout(() => {
+        let currentPath = window.location.pathname;
+        Array.prototype.slice.call(this.shadowRoot.querySelectorAll('dl')).forEach((menuGroup) => {
+          // Attach the click handler
+          menuGroup.onclick = () => this._toggleMenu(menuGroup);
+          let subMenu = menuGroup.querySelector('dd');
+          let height = subMenu.clientHeight;
+          // Force the subMenu to the right initial position
+          window.requestAnimationFrame(() => subMenu.style = `margin-top: -${height}px;`);
+          // Enable the css transition property after the subMenu has been positioned (hopefully)
+          // TODO: Make this work in all cases. Need some way to delay until after the above margin change has been applied.
+          window.setTimeout(() => menuGroup.setAttribute('initialized', ''), 0);
+
+          // Style the active link
+          Array.prototype.slice.call(subMenu.querySelectorAll('a')).forEach((link) => {
+            if (link.pathname === currentPath) {
+              link.style = 'color: var(--header-color, #512DA8); font-weight: bold;';
+            }
+          });
+        });
+      }, 0);
+    }
+
+    _toggleMenu(menuGroup) {
+      let subMenu = menuGroup.querySelector('dd');
       if (menuGroup.hasAttribute('collapsed')) {
         menuGroup.removeAttribute('collapsed');
+        subMenu.style = 'margin-top: 0;';
       } else {
         menuGroup.setAttribute('collapsed', '');
+        subMenu.style = `margin-top: -${subMenu.clientHeight}px;`;
       }
     }
   }
