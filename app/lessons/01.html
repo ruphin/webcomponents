@@ -1,53 +1,66 @@
 <!DOCTYPE html>
 <link rel="import" href="/elements/component-tutorial-page.html">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
-<script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js?autoload=true&amp;skin=sunburst&amp;lang=css" defer="defer"></script>
 
 <style>
   body {
     margin: 0;
+    font-size
+  }
+  pre {
+
+  }
+  code.hljs {
+    /*background: white;*/
+    line-height: 24px;
   }
 </style>
 
+<template id="code" >
+  <my-element></my-element>
+
+  <script>
+  class MyElement extends HTMLElement {
+    connectedCallback() {
+      this.innerHTML = "<h1>Hello!</h1><p>I am a custom element</p>";
+    }
+  }
+  customElements.define('my-element', MyElement);
+  </script>
+</template>
+
 <component-tutorial-page>
-<h1 slot="header-title">0. Introduction</h1>
+<h1 slot="header-title">1. Custom Element</h1>
 <div class="content">
-  <p>Welcome to this short course on native Web Components.</p>
-
-  <p>
-    The goal of this course is to help you understand how to implement Web Components with plain HTML, CSS, and Javascript.
-  </p>
-
-
-  <p>
-    After this course you will have learned the following about Web Components
-    <ul>
-      <li>
-        How to create a Web Component with vanilla HTML and Javascript
-      </li>
-      <li>
-        How to define content
-      </li>
-      <li>
-        How to work with styles
-      </li>
-      <li>
-        How to add dynamic content
-      </li>
-      <li>
-        How to implement data-binding-like constructs
-      </li>
-      <li>
-        How to use inheritance and composition
-      </li>
-      <li>
-        And some other useful techniques...
-      </li>
-    </ul>
-  </p>
+  <p>Something about custom element</p>
+  <pre><code class="prettyprint" id="all"></code></pre>
+  <p>Some more text</p>
+  <pre><code class="prettyprint" id="first"></code></pre>
+  <p>Even more text</p>
+  <pre><code class="prettyprint" id="second"></code></pre>
 </div>
-<a slot="footer-link" class="right" href="/lessons/01.html">1. Custom Element</a>
+<a slot="footer-link" class="left" href="/lessons/00.html">0. Introduction</a>
+<a slot="footer-link" class="right" href="/lessons/02.html">2. Templates</a>
 </component-tutorial-page>
+
+<script src="/vendor/highlightjs/highlight.pack.js"></script>
+<script>
+  {
+    let parseCode = templateId => {
+      let lines = document.getElementById(templateId).innerHTML.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').split('\n');
+      lines.shift();
+      return lines;
+    }
+
+    let codeSnippet = parseCode('code');
+
+    document.getElementById("all").innerHTML = codeSnippet.join('\n');
+    document.getElementById("first").innerHTML = codeSnippet.slice(0,1).join('\n');
+    document.getElementById("second").innerHTML = codeSnippet.slice(2,10).join('\n');
+    hljs.initHighlightingOnLoad();
+  }
+</script>
+<link rel="stylesheet" href="/vendor/highlightjs/styles/monokai.css">
 
 <!-- <p>
   All the code

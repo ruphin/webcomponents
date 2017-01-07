@@ -1,67 +1,70 @@
 <link rel="import" href="./custom-html-element.html">
 
 <template id="component-tutorial-sidenav-template">
-  <div class="ident">
-    <a href="/">Web Components</a>
+  <div id="ident">
+    <span>Web Components<span>
   </div>
-  <nav>
-    <dl collapsed>
-      <dt tabindex="0">Lessons</dt>
-      <div class="wrapper">
-        <dd>
-          <a href="/lessons/00.html">0: Introduction</a>
-          <a href="/lessons/01.html">1: Custom Element</a>
-          <a href="/components/lessons/02.html">2: Templates</a>
-          <a href="/components/lessons/03.html">3: Style</a>
-          <a href="/components/lessons/04.html">4: Shadow DOM</a>
-          <a href="/components/lessons/05.html">5: Properties and Attributes</a>
-          <a href="/components/lessons/06.html">6: The Constructor</a>
-          <a href="/components/lessons/07.html">7: Styling the Host Element</a>
-          <a href="/components/lessons/08.html">8: Internal ID lookup table</a>
-          <a href="/components/lessons/09.html">9: State</a>
-          <a href="/components/lessons/10.html">10: Simple data-binding</a>
-          <a href="/components/lessons/11.html">11: Attributes as initializers</a>
-          <a href="/components/lessons/12.html">12: Observing Attribute changes</a>
-          <a href="/components/lessons/13.html">13: Reflecting Properties to Attributes</a>
-          <a href="/components/lessons/14.html">14: ShadowRoot and child nodes</a>
-          <a href="/components/lessons/15.html">15: Distributing child nodes</a>
-          <a href="/components/lessons/16.html">16: Named child nodes</a>
-          <a href="/components/lessons/17.html">17: Inheritance and Nesting</a>
-          <a href="/components/lessons/18.html">18: Two-way dataflow</a>
-        </dd>
+  <nav id="nav">
+    <a href="/">Home</a>
+    <div collapsed class="menu-group">
+      <a tabindex="0" class="menu-toggle">Lessons</a>
+      <div class="sub-menu">
+        <div class="wrapper">
+          <a href="/lessons/00.html">0. Introduction</a>
+          <a href="/lessons/01.html">1. Custom Element</a>
+          <a href="/lessons/02.html">2. Templates</a>
+          <a href="/lessons/03.html">3. Style</a>
+          <a href="/lessons/04.html">4. Shadow DOM</a>
+          <a href="/lessons/05.html">5. Properties and Attributes</a>
+          <a href="/lessons/06.html">6. The Constructor</a>
+          <a href="/lessons/07.html">7. Styling the Host Element</a>
+          <a href="/lessons/08.html">8. Internal ID lookup table</a>
+          <a href="/lessons/09.html">9. State</a>
+          <a href="/lessons/10.html">10. Simple data-binding</a>
+          <a href="/lessons/11.html">11. Attributes as initializers</a>
+          <a href="/lessons/12.html">12. Observing Attribute changes</a>
+          <a href="/lessons/13.html">13. Reflecting Properties to Attributes</a>
+          <a href="/lessons/14.html">14. ShadowRoot and child nodes</a>
+          <a href="/lessons/15.html">15. Distributing child nodes</a>
+          <a href="/lessons/16.html">16. Named child nodes</a>
+          <a href="/lessons/17.html">17. Inheritance and Nesting</a>
+          <a href="/lessons/18.html">18. Two-way dataflow</a>
+        </div>
       </div>
-    </dl>
+    </div>
 
-    <dl collapsed>
-      <dt tabindex="0">Articles</dt>
-      <div class="wrapper">
-        <dd>
-        <a>None yet!</a>
-        </dd>
+    <div collapsed class="menu-group">
+      <a tabindex="0" class="menu-toggle">Articles</a>
+      <div class="sub-menu">
+        <div class="wrapper">
+          <a>None yet!</a>
+        </div>
       </div>
-    </dl>
+    </div>
 
-    <dl collapsed>
-      <dt tabindex="0">References</dt>
-      <div class="wrapper">
-        <dd>
-        <a>None yet!</a>
-        </dd>
+    <div collapsed class="menu-group">
+      <a tabindex="0" class="menu-toggle">References</a>
+      <div class="sub-menu">
+        <div class="wrapper">
+          <a>None yet!</a>
+        </div>
       </div>
-    </dl>
+    </div>
 
-    <dl collapsed>
-      <dt tabindex="0">Links</dt>
-      <div class="wrapper">
-        <dd>
-        <a href="overwebs.ruph.in">Overwebs</a>
-        </dd>
+    <div collapsed class="menu-group">
+      <a tabindex="0" class="menu-toggle">Links</a>
+      <div class="sub-menu">
+        <div class="wrapper">
+          <a href="https://www.html5rocks.com">HTML5Rocks</a>
+          <a href="https://overwebs.ruph.in">Overwebs</a>
+        </div>
       </div>
-    </dl>
+    </div>
   </nav>
   <div class="footer">
     <div class="legal">Ruphin ©</div>
     <div class="resources">
+      <a href="/about.html">About</a>
       <a href="https://github.com/ruphin/web-component-course">Github</a>
       <a href="mailto:ruphin@ruphin.net">Contact</a>
     </div>
@@ -73,7 +76,8 @@
       align-items: stretch;
       font-family: sans-serif;
     }
-    .ident {
+
+    #ident {
       display: flex;
       align-items: center;
       padding-left: 26px;
@@ -82,60 +86,93 @@
       text-transform: uppercase;
       letter-spacing: 1px;
       height: var(--header-height, 56px);
-      margin-bottom: 8px;
-      border-bottom: 1px solid rgba(0,0,0,0.12);
-    }
-    .ident a {
-      color: inherit;
-      line-height: 40px;
-    }
-    nav {
-      font-size: 13px;
-      padding-top: 8px;
-      padding-bottom: 8px;
-      border-bottom: 1px solid rgba(0,0,0,0.12);
-    }
-    dl {
-      margin: 0;
+      user-select: none;
+      cursor: default;
     }
 
-    dt {
-      display: flex;
-      align-items: center;
-      height: 48px;
-      padding-left: 26px;
-      font-weight: bold;
-      cursor: pointer;
-    }
-    dt:focus {
-      background-color: #eeeeee;
-    }
-
-    dl[collapsed] dd {
-      margin-top: -10000px;
-    }
-    dl[initialized] dd {
-      transition: margin ease-out 0.2s;
-    }
-    dl .wrapper {
-      overflow: hidden;
-    }
-    dd {
-      box-sizing: border-box;
-      margin-left: 0;
-      padding-bottom: 8px;
-    }
-    dd > * {
-      height: 34px;
-      padding-left: 36px;
-    }
-    dd a {
-      display: flex;
-      align-items: center;
-      color: inherit;
-    }
     a {
       text-decoration: none;
+    }
+
+    nav {
+      font-size: 13px;
+    }
+
+    nav a {
+      display: flex;
+      height: 48px;
+      align-items: center;
+      padding-left: 30px;
+      border-left-width: 4px;
+      border-left-color: transparent;
+      border-left-style: solid;
+      font-size: 15px;
+      color: #6b6b6b;
+      border-bottom: 1px solid rgba(0,0,0,0.12);
+    }
+
+    nav a[active] {
+      border-left-color: var(--accent-color, #4CAF50);
+      color: black;
+      font-weight: bold;
+    }
+    nav[open] a[active] {
+      font-weight: normal;
+    }
+    nav[open] a, nav[open] .menu-toggle {
+      background: #f4f5f6;
+    }
+    nav .menu-group:not([collapsed]) a {
+      background: white;
+      color: black;
+    }
+    nav .menu-group:not([collapsed]) a.menu-toggle, nav .menu-group:not([collapsed]) a[active] {
+      font-weight: bold;
+    }
+    .menu-toggle {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 48px;
+      padding-left: 34px;
+      user-select: none;
+      cursor: default;
+    }
+    .menu-toggle::after {
+      content: "";
+      display: block;
+      flex-shrink: 0;
+      margin-right: 16px;
+      width: 24px;
+      height: 24px;
+      background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'><g><path fill='black' d='M12 8l-6 6 1.41 1.41L12 10.83l4.59 4.58L18 14z'></path></g></svg>");
+    }
+
+    .menu-group[collapsed] .menu-toggle::after {
+      transform: rotate(180deg);
+    }
+
+    .menu-group[collapsed] .wrapper {
+      margin-top: -10000px;
+    }
+    .menu-group[initialized] .wrapper {
+      transition: margin ease-out 0.2s;
+    }
+    .menu-group .sub-menu {
+      overflow: hidden;
+    }
+    .wrapper {
+      box-sizing: border-box;
+      margin-left: 0;
+    }
+    .wrapper > * {
+      height: 48px;
+      padding-left: 36px;
+    }
+    .wrapper a {
+      display: flex;
+      align-items: center;
+      color: inherit;
     }
     .footer {
       padding: 16px 8px 16px 26px;
@@ -169,40 +206,73 @@
     constructor() {
       super();
       this._initializeMenu();
+      this.$.ident.onclick = () => {
+        this.dispatchEvent(new CustomEvent('close-drawer', {
+          bubbles: true
+        }));
+      }
     }
+
     _initializeMenu() {
       // The setTimeout here is to make sure we do a layout before the initialization
       window.setTimeout(() => {
         let currentPath = window.location.pathname;
-        Array.prototype.slice.call(this.shadowRoot.querySelectorAll('dl')).forEach((menuGroup) => {
+        let currentHost = window.location.hostname;
+        Array.prototype.slice.call(this.shadowRoot.querySelectorAll('.menu-group')).forEach((menuGroup) => {
           // Attach the click handler
-          menuGroup.onclick = () => this._toggleMenu(menuGroup);
-          let subMenu = menuGroup.querySelector('dd');
-          let height = subMenu.clientHeight;
-          // Force the subMenu to the right initial position
-          window.requestAnimationFrame(() => subMenu.style = `margin-top: -${height}px;`);
+          menuGroup.querySelector('.menu-toggle').onclick = () => this._toggleMenu(menuGroup);
+
+          let subMenu = menuGroup.querySelector('.wrapper');
+
+          // Find if there's an active link in this submenu
+          let activeSubmenu = Array.prototype.slice.call(subMenu.querySelectorAll('a')).find((link) => {
+            if (link.pathname === currentPath && link.hostname === currentHost) {
+              console.log(link.hostname, link.pathname)
+              this.$.nav.setAttribute('open', '');
+              link.setAttribute('active', '');
+              return true;
+            }
+            return false;
+          });
+
+          // Set the subMenu to the right initial position
+          if (activeSubmenu) {
+            window.requestAnimationFrame(() => this._toggleMenu(menuGroup));
+          } else {
+            let height = subMenu.clientHeight;
+            window.requestAnimationFrame(() => subMenu.style = `margin-top: -${height}px;`);
+          }
+
           // Enable the css transition property after the subMenu has been positioned (hopefully)
           // TODO: Make this work in all cases. Need some way to delay until after the above margin change has been applied.
-          window.setTimeout(() => menuGroup.setAttribute('initialized', ''), 0);
-
-          // Style the active link
-          Array.prototype.slice.call(subMenu.querySelectorAll('a')).forEach((link) => {
-            if (link.pathname === currentPath) {
-              link.style = 'color: var(--header-color, #512DA8); font-weight: bold;';
-            }
-          });
+          window.setTimeout(() => menuGroup.setAttribute('initialized', ''), 100);
+        });
+        Array.prototype.slice.call(this.shadowRoot.querySelectorAll('#nav > a')).forEach((link) => {
+          if (link.pathname === currentPath && link.hostname === currentHost) {
+            console.log(link.hostname, link.pathname)
+            link.setAttribute('active', '');
+          }
         });
       }, 0);
     }
 
     _toggleMenu(menuGroup) {
-      let subMenu = menuGroup.querySelector('dd');
+      if (this.openedMenuGroup && this.openedMenuGroup !== menuGroup) {
+        this.openedMenuGroup.setAttribute('collapsed', '');
+        let subMenu = this.openedMenuGroup.querySelector('.wrapper');
+        subMenu.style = `margin-top: -${subMenu.clientHeight}px;`;
+      }
+      let subMenu = menuGroup.querySelector('.wrapper');
       if (menuGroup.hasAttribute('collapsed')) {
         menuGroup.removeAttribute('collapsed');
         subMenu.style = 'margin-top: 0;';
+        this.openedMenuGroup = menuGroup;
+        this.$.nav.setAttribute('open', '');
       } else {
         menuGroup.setAttribute('collapsed', '');
         subMenu.style = `margin-top: -${subMenu.clientHeight}px;`;
+        this.openedMenuGroup = false;
+        this.$.nav.removeAttribute('open');
       }
     }
   }

@@ -12,6 +12,9 @@
       </component-tutorial-header>
       <div class="body">
         <slot></slot>
+        <div class="footer-links">
+          <slot name="footer-link"></slot>
+        </div>
       </div>
     </div>
   </vanilla-drawer-layout>
@@ -29,32 +32,70 @@
     }
 
     :host .main-panel .body {
+      position: relative;
       overflow-y: scroll;
       height: calc(100% - var(--header-height, 56px));
     }
 
-    :host ::slotted(div.content) {
+    :host .body ::slotted(div.content) {
       margin: auto;
-    }
-
-    :host ::slotted(div.content) {
+      overflow-y: auto;
+      min-height: calc(100% - 86px);
       width: 1160px;
     }
 
+    :host .footer-links {
+      display: flex;
+      flex-flow: column wrap;
+      background: #f4f5f6;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      max-height: 86px;
+    }
+
+    :host .footer-links ::slotted(a) {
+      display: inline-flex;
+      align-items: center;
+      height: 86px;
+      color: rgba(255,255,255,.87);
+      font-family: sans-serif;
+      font-size: 20px;
+      font-weight: bold;
+      text-decoration: none;
+      box-sizing: border-box;
+      width: 50%;
+      background-repeat: no-repeat;
+    }
+    :host .footer-links ::slotted(a.left) {
+      background-color: var(--accent-color, #4CAF50);
+      justify-content: flex-start;
+      padding-left: 16%;
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'><g><path fill='rgba(255,255,255,.87)' d='M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z' /></g></svg>");
+      background-position: calc(32% - 24px) center;
+    }
+    :host .footer-links ::slotted(a.right) {
+      background-color: var(--primary-color, #673AB7);
+      justify-content: flex-end;
+      padding-right: 16%;
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'><g><path fill='rgba(255,255,255,.87)' d='M4,11V13H16L10.5,18.5L11.92,19.92L19.84,12L11.92,4.08L10.5,5.5L16,11H4Z'></path></g></svg>");
+      background-position: calc(68% + 24px) center;
+      align-self: flex-end;
+    }
     @media(max-width: 1240px) {
-      :host ::slotted(div.content) {
+      :host .body ::slotted(div.content) {
         width: 760px;
       }
     }
 
     @media(max-width: 800px) {
-      :host ::slotted(div.content) {
+      :host .body ::slotted(div.content) {
         width: 360px;
       }
     }
 
     @media(max-width: 380px) {
-      :host ::slotted(div.content) {
+      :host .body ::slotted(div.content) {
         margin: 0 16px;
         width: auto;
       }
