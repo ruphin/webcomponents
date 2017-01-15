@@ -1,0 +1,18 @@
+body {
+  --dark-primary-color: #512DA8;
+  --primary-color: #673AB7;
+  --highlight-color: #512DA8;
+  --primary-text-color: rgba(0,0,0,0.87);
+  --secondary-text-color: rgba(0,0,0,0.54);
+  --disabled-text-color: rgba(0,0,0,0.38);
+  --primary-text-on-dark-color: rgba(255,255,255,1);
+  --secondary-text-on-dark-color: rgba(255,255,255,.87);
+  margin: 0;
+  font-family: sans-serif;
+  font-size: 18px;
+  line-height: 30px;
+  color: var(--primary-text-color);
+}
+p a, p a:visited {
+  color: var(--dark-primary-color);
+}

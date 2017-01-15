@@ -1,20 +1,7 @@
 <!DOCTYPE html>
 <link rel="import" href="/elements/component-tutorial-page.html">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
-
-<style>
-  body {
-    margin: 0;
-    font-size
-  }
-  pre {
-
-  }
-  code.hljs {
-    /*background: white;*/
-    line-height: 24px;
-  }
-</style>
+<link href="/style/main.css" rel="stylesheet">
 
 <template id="code" >
   <my-element></my-element>
@@ -62,47 +49,4 @@
 </script>
 <link rel="stylesheet" href="/vendor/highlightjs/styles/monokai.css">
 
-<!-- <p>
-  All the code
-</p>
-<pre class="prettyprint" id="all" style="border:4px solid #88c"></pre>
-<p>
-  Part of it
-</p>
-<pre class="prettyprint" id="first" style="border:4px solid #88c"></pre>
-<p>
-  The rest
-</p>
-<pre class="prettyprint" id="second" style="border:4px solid #88c"></pre>
-
-<template id="code">
-<my-element></my-element>
-
-<script>
-// Extend an HTMLElement or another custom element
-class MyElement extends HTMLElement {
-  // This is called when our element is attached to the DOM
-  connectedCallback() {
-    this.innerHTML = "<h1>Hello!</h1><p>I am a custom element</p>";
-  }
-}
-
-// Tell the browser to create an instance of MyElement when it parses the '<my-element>' tag
-customElements.define('my-element', MyElement);
-</script>
-</template>
-<script>
-  {
-    let parseCode = templateId => {
-      let lines = document.getElementById(templateId).innerHTML.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').split('\n');
-      lines.unshift("&lt;!DOCTYPE html&gt;");
-      return lines;
-    }
-
-    let codeSnippet = parseCode('code');
-
-    document.getElementById("all").innerHTML = codeSnippet.join('\n');
-    document.getElementById("first").innerHTML = codeSnippet.slice(2,3).join('\n');
-    document.getElementById("second").innerHTML = codeSnippet.slice(5,15).join('\n');
-  }
-</script> -->
+<script src="/bower_components/webcomponentsjs/webcomponents-loader.js" charset="utf-8"></script>

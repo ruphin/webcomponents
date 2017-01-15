@@ -9,12 +9,31 @@
     <slot></slot>
   </div>
   <style>
+    /* Polyfill support */
+    vanilla-drawer-layout {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-flow: row;
+      align-items: stretch;
+    }
+    /* Polyfill support */
+    vanilla-drawer-layout[open] #overlay {
+      pointer-events: auto;
+      opacity: 1;
+    }
+
     :host {
       width: 100%;
       height: 100%;
       display: flex;
       flex-flow: row;
       align-items: stretch;
+    }
+
+    :host([open]) #overlay {
+      pointer-events: auto;
+      opacity: 1;
     }
 
     .drawer {
@@ -43,11 +62,6 @@
       flex-grow: 1;
     }
 
-    :host([open]) #overlay {
-      pointer-events: auto;
-      opacity: 1;
-    }
-
     @media(min-width: 1457px) {
       .drawer {
         border-right: 1px solid rgba(0,0,0,0.12);
@@ -58,10 +72,14 @@
     }
 
     @media(max-width: 1456px) {
-      :host .backdrop {
+      .backdrop {
         transition: opacity ease-in-out 0.38s, visibility ease-in-out 0.38s;
         background-color: rgba(0, 0, 0, 0.3);
+      }
 
+      /* Polyfill support */
+      vanilla-drawer-layout:not([open]) #overlay {
+        pointer-events: none;
       }
 
       :host(:not([open])) .overlay {
@@ -72,12 +90,22 @@
         margin-left: -256px;
       }
 
+      /* Polyfill support */
+      vanilla-drawer-layout[open] .drawer {
+        transform: translateX(100%);
+        box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.15);
+      }
 
       :host([open]) .drawer {
         transform: translateX(100%);
         box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.15);
       }
 
+
+      /* Polyfill support */
+      vanilla-drawer-layout[permanent] {
+        border-right: 1px solid rgba(0,0,0,.14);
+      }
 
       :host[permanent] {
         border-right: 1px solid rgba(0,0,0,.14);
@@ -88,7 +116,12 @@
 
 <script>
 {
-  let doc = document.currentScript.ownerDocument
+  let doc;
+  if (document._currentScript) {
+    doc = document._currentScript.ownerDocument;
+  } else {
+    doc = document.currentScript.ownerDocument;
+  }
   class VanillaDrawerLayout extends CustomHTMLElement {
     static get is() {
       return 'vanilla-drawer-layout';

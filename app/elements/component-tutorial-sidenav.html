@@ -70,13 +70,20 @@
     </div>
   </div>
   <style>
-    :host {
+    /* Polyfill support */
+    component-tutorial-sidenav {
       display: flex;
       flex-flow: column;
       align-items: stretch;
       font-family: sans-serif;
     }
 
+    :host {
+      display: flex;
+      flex-flow: column;
+      align-items: stretch;
+      font-family: sans-serif;
+    }
     #ident {
       display: flex;
       align-items: center;
@@ -96,6 +103,7 @@
 
     nav {
       font-size: 13px;
+      line-height: 1.4;
     }
 
     nav a {
@@ -107,13 +115,13 @@
       border-left-color: transparent;
       border-left-style: solid;
       font-size: 15px;
-      color: #6b6b6b;
+      color: var(--secondary-text-color, rgba(0,0,0,0.54));
       border-bottom: 1px solid rgba(0,0,0,0.12);
     }
 
     nav a[active] {
       border-left-color: var(--accent-color, #4CAF50);
-      color: black;
+      color: var(--primary-text-color, rgba(0,0,0,0.87));
       font-weight: bold;
     }
     nav[open] a[active] {
@@ -124,7 +132,7 @@
     }
     nav .menu-group:not([collapsed]) a {
       background: white;
-      color: black;
+      color: var(--primary-text-color, rgba(0,0,0,0.87));
     }
     nav .menu-group:not([collapsed]) a.menu-toggle, nav .menu-group:not([collapsed]) a[active] {
       font-weight: bold;
@@ -145,7 +153,7 @@
       margin-right: 16px;
       width: 24px;
       height: 24px;
-      background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'><g><path fill='black' d='M12 8l-6 6 1.41 1.41L12 10.83l4.59 4.58L18 14z'></path></g></svg>");
+      background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><g><path fill="black" d="M12 8l-6 6 1.41 1.41L12 10.83l4.59 4.58L18 14z"></path></g></svg>');
     }
 
     .menu-group[collapsed] .menu-toggle::after {
@@ -185,7 +193,7 @@
       align-items: center;
     }
     .resources a {
-      color: rgb(2, 119, 187);
+      color: var(--dark-primary-color, #512DA8);
     }
     .resources a:not(:first-of-type) {
       margin-left: 12px;
@@ -195,7 +203,12 @@
 
 <script>
 {
-  let doc = document.currentScript.ownerDocument
+  let doc;
+  if (document._currentScript) {
+    doc = document._currentScript.ownerDocument;
+  } else {
+    doc = document.currentScript.ownerDocument;
+  }
   class ComponentTutorialSidenav extends CustomHTMLElement {
     static get is() {
       return 'component-tutorial-sidenav';
@@ -227,7 +240,6 @@
           // Find if there's an active link in this submenu
           let activeSubmenu = Array.prototype.slice.call(subMenu.querySelectorAll('a')).find((link) => {
             if (link.pathname === currentPath && link.hostname === currentHost) {
-              console.log(link.hostname, link.pathname)
               this.$.nav.setAttribute('open', '');
               link.setAttribute('active', '');
               return true;
@@ -249,7 +261,6 @@
         });
         Array.prototype.slice.call(this.shadowRoot.querySelectorAll('#nav > a')).forEach((link) => {
           if (link.pathname === currentPath && link.hostname === currentHost) {
-            console.log(link.hostname, link.pathname)
             link.setAttribute('active', '');
           }
         });

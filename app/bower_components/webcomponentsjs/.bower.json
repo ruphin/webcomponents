@@ -1,0 +1,40 @@
+{
+  "name": "webcomponentsjs",
+  "main": "webcomponents.js",
+  "homepage": "http://webcomponents.org",
+  "authors": [
+    "The Polymer Authors"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/webcomponents/webcomponentsjs.git"
+  },
+  "keywords": [
+    "webcomponents"
+  ],
+  "dependencies": {
+    "custom-elements": "webcomponents/custom-elements#master",
+    "es6-promise": "stefanpenner/es6-promise#^4.0.0",
+    "html-imports": "webcomponents/html-imports#cleanup",
+    "shadydom": "webcomponents/shadydom#master",
+    "shadycss": "webcomponents/shadycss#master",
+    "template": "webcomponents/template#master",
+    "URL": "webcomponents/URL#master",
+    "webcomponents-platform": "webcomponents/webcomponents-platform#master"
+  },
+  "license": "BSD",
+  "ignore": [],
+  "devDependencies": {
+    "web-component-tester": "^4.0.1"
+  },
+  "_release": "2b6246572c",
+  "_resolution": {
+    "type": "branch",
+    "branch": "gulp-all-the-things",
+    "commit": "2b6246572c440343b8053ed71ead8c7d694ea399"
+  },
+  "_source": "git://github.com/webcomponents/webcomponentsjs.git",
+  "_target": "gulp-all-the-things",
+  "_originalSource": "webcomponents/webcomponentsjs",
+  "_direct": true
+}

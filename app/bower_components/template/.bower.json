@@ -1,0 +1,13 @@
+{
+  "name": "template",
+  "homepage": "https://github.com/webcomponents/template",
+  "_release": "81ba4335a2",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "81ba4335a21f96ea58c6a5129ce4b2482fb6c1b2"
+  },
+  "_source": "git://github.com/webcomponents/template.git",
+  "_target": "master",
+  "_originalSource": "webcomponents/template"
+}

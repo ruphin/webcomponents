@@ -10,6 +10,16 @@
   <slot name="title"></slot>
 
   <style>
+    /* Polyfill support */
+    component-tutorial-header {
+      display: flex;
+      flex-flow: row;
+      align-items: center;
+      height: var(--header-height, 56px);
+      background-color: var(--primary-color, #673AB7);
+      box-shadow: 0 2px 5px rgba(0,0,0,.26);
+    }
+
     :host {
       display: flex;
       flex-flow: row;
@@ -19,12 +29,12 @@
       box-shadow: 0 2px 5px rgba(0,0,0,.26);
     }
 
-    :host slot[name="title"]::slotted(h1) {
+    slot[name="title"]::slotted(h1) {
       font-size: 18px;
       letter-spacing: .6px;
       font-family: sans-serif;
       font-weight: normal;
-      color: white;
+      color: var(--primary-text-on-dark-color, rgba(255,255,255,1));
       margin: 0;
     }
     #open {
@@ -50,7 +60,12 @@
 
 <script>
 {
-  let doc = document.currentScript.ownerDocument
+  let doc;
+  if (document._currentScript) {
+    doc = document._currentScript.ownerDocument;
+  } else {
+    doc = document.currentScript.ownerDocument;
+  }
   class ComponentTutorialHeader extends CustomHTMLElement {
     static get is() {
       return 'component-tutorial-header';

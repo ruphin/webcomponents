@@ -20,31 +20,38 @@
   </vanilla-drawer-layout>
 
   <style>
+    /* Polyfill support */
+    component-tutorial-page {
+      display: block;
+      height: 100vh;
+      width: 100vw;
+    }
+
     :host {
       display: block;
       height: 100vh;
       width: 100vw;
     }
 
-    :host .main-panel {
+    .main-panel {
       background-color: #fafafa;
       height: 100%;
     }
 
-    :host .main-panel .body {
+    .main-panel .body {
       position: relative;
       overflow-y: scroll;
       height: calc(100% - var(--header-height, 56px));
     }
 
-    :host .body ::slotted(div.content) {
+    .body ::slotted(div.content) {
       margin: auto;
       overflow-y: auto;
       min-height: calc(100% - 86px);
       width: 1160px;
     }
 
-    :host .footer-links {
+    .footer-links {
       display: flex;
       flex-flow: column wrap;
       background: #f4f5f6;
@@ -54,11 +61,11 @@
       max-height: 86px;
     }
 
-    :host .footer-links ::slotted(a) {
-      display: inline-flex;
+    .footer-links ::slotted(a) {
+      display: flex;
       align-items: center;
       height: 86px;
-      color: rgba(255,255,255,.87);
+      color: var(--secondary-text-on-dark-color, rgba(255,255,255,.87));
       font-family: sans-serif;
       font-size: 20px;
       font-weight: bold;
@@ -67,14 +74,14 @@
       width: 50%;
       background-repeat: no-repeat;
     }
-    :host .footer-links ::slotted(a.left) {
+    .footer-links ::slotted(a.left) {
       background-color: var(--accent-color, #4CAF50);
       justify-content: flex-start;
       padding-left: 16%;
       background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'><g><path fill='rgba(255,255,255,.87)' d='M20,11V13H8L13.5,18.5L12.08,19.92L4.16,12L12.08,4.08L13.5,5.5L8,11H20Z' /></g></svg>");
       background-position: calc(32% - 24px) center;
     }
-    :host .footer-links ::slotted(a.right) {
+    .footer-links ::slotted(a.right) {
       background-color: var(--primary-color, #673AB7);
       justify-content: flex-end;
       padding-right: 16%;
@@ -83,21 +90,37 @@
       align-self: flex-end;
     }
     @media(max-width: 1240px) {
-      :host .body ::slotted(div.content) {
+      .body ::slotted(div.content) {
         width: 760px;
       }
     }
 
     @media(max-width: 800px) {
-      :host .body ::slotted(div.content) {
+      .body ::slotted(div.content) {
         width: 360px;
       }
     }
 
+    @media(max-width: 520px) {
+      .footer-links {
+        flex-flow: column;
+        max-height: 122px;
+      }
+      .footer-links ::slotted(a) {
+        width: 100%;
+      }
+      .footer-links ::slotted(a.left) {
+        padding-left: 32%;
+      }
+      .footer-links ::slotted(a.right) {
+        padding-right: 32%;
+      }
+    }
+
     @media(max-width: 380px) {
-      :host .body ::slotted(div.content) {
+      .body ::slotted(div.content) {
         margin: 0 16px;
-        width: auto;
+        width: calc(100vw - 32px);
       }
     }
   </style>
@@ -105,7 +128,12 @@
 
 <script>
 {
-  let doc = document.currentScript.ownerDocument
+  let doc;
+  if (document._currentScript) {
+    doc = document._currentScript.ownerDocument;
+  } else {
+    doc = document.currentScript.ownerDocument;
+  }
   class ComponentTutorialPage extends CustomHTMLElement {
     static get is() {
       return 'component-tutorial-page';
