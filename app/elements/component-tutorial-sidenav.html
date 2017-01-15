@@ -252,7 +252,7 @@
             window.requestAnimationFrame(() => this._toggleMenu(menuGroup));
           } else {
             let height = subMenu.clientHeight;
-            window.requestAnimationFrame(() => subMenu.style = `margin-top: -${height}px;`);
+            window.requestAnimationFrame(() => subMenu.style.marginTop = `-${height}px`);
           }
 
           // Enable the css transition property after the subMenu has been positioned (hopefully)
@@ -271,17 +271,17 @@
       if (this.openedMenuGroup && this.openedMenuGroup !== menuGroup) {
         this.openedMenuGroup.setAttribute('collapsed', '');
         let subMenu = this.openedMenuGroup.querySelector('.wrapper');
-        subMenu.style = `margin-top: -${subMenu.clientHeight}px;`;
+        subMenu.style.marginTop = `-${subMenu.clientHeight}px`;
       }
       let subMenu = menuGroup.querySelector('.wrapper');
       if (menuGroup.hasAttribute('collapsed')) {
         menuGroup.removeAttribute('collapsed');
-        subMenu.style = 'margin-top: 0;';
+        subMenu.style.marginTop = '0';
         this.openedMenuGroup = menuGroup;
         this.$.nav.setAttribute('open', '');
       } else {
         menuGroup.setAttribute('collapsed', '');
-        subMenu.style = `margin-top: -${subMenu.clientHeight}px;`;
+        subMenu.style.marginTop = `-${subMenu.clientHeight}px`;
         this.openedMenuGroup = false;
         this.$.nav.removeAttribute('open');
       }
