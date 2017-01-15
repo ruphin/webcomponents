@@ -220,9 +220,7 @@
       super();
       this._initializeMenu();
       this.$.ident.onclick = () => {
-        this.dispatchEvent(new CustomEvent('close-drawer', {
-          bubbles: true
-        }));
+        window.dispatchEvent(new CustomEvent('close-drawer'));
       }
     }
 

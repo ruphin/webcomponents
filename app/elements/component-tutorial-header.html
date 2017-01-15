@@ -75,9 +75,7 @@
     }
     connectedCallback() {
       this.$.open.onclick = () => {
-        this.dispatchEvent(new CustomEvent('open-drawer', {
-          bubbles: true
-        }));
+        window.dispatchEvent(new CustomEvent('open-drawer'));
       }
     }
   }

@@ -131,8 +131,8 @@
     }
     constructor() {
       super();
-      this.addEventListener('open-drawer', () => this.openDrawer());
-      this.addEventListener('close-drawer', () => this.closeDrawer());
+      window.addEventListener('open-drawer', () => this.openDrawer());
+      window.addEventListener('close-drawer', () => this.closeDrawer());
     }
     connectedCallback() {
       this.$.overlay.onclick = () => this.closeDrawer();
