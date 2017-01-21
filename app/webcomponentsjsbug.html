@@ -2,18 +2,27 @@
 
 <script src="/bower_components/webcomponentsjs/webcomponents-loader.js" charset="utf-8"></script>
 
-<h2>After Webcomponentsjs:</h2>
-<after-webcomponentsjs>
-</after-webcomponentsjs>
-
-<h2>Before Webcomponentsjs:</h2>
+<h1>Before Webcomponentsjs</h1>
+<!-- This renders fine -->
 <before-webcomponentsjs>
 </before-webcomponentsjs>
+
+<h1>After Webcomponentsjs</h1>
+<!-- This renders fine -->
+<h2>Without Fallback Content</h2>
+<after-webcomponentsjs>
+  <p slot="first">First Line</p>
+</after-webcomponentsjs>
+
+<h2>With Fallback Content</h2>
+<!-- This renders in reverse order -->
+<after-webcomponentsjs>
+</after-webcomponentsjs>
 
 <template id="element-template">
   <h3>First Header</h3>
   <slot name="first">
-    <p>First Line</p>
+    <p>First Line - fallback</p>
   </slot>
   <h3>Second Header</h3>
   <div>
