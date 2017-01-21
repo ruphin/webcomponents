@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+
+<script src="/bower_components/webcomponentsjs/webcomponents-loader.js" charset="utf-8"></script>
+
+<h2>After Webcomponentsjs:</h2>
+<after-webcomponentsjs>
+</after-webcomponentsjs>
+
+<h2>Before Webcomponentsjs:</h2>
+<before-webcomponentsjs>
+</before-webcomponentsjs>
+
+<template id="element-template">
+  <h3>First Header</h3>
+  <slot name="first">
+    <p>First Line</p>
+  </slot>
+  <h3>Second Header</h3>
+  <div>
+    <slot name="second">
+      <p>Second Line</p>
+    </slot>
+  </div>
+</template>
+
+<script>
+  window.addEventListener('WebComponentsReady', () => {
+    class AfterWebcomponentsjs extends HTMLElement {
+      constructor() {
+        super();
+        let template = document.getElementById('element-template');
+        let content = template.content.cloneNode(true);
+        this.attachShadow({mode: 'open'});
+        this.shadowRoot.appendChild(content);
+      }
+    }
+    customElements.define('after-webcomponentsjs', AfterWebcomponentsjs);
+  });
+
+  class BeforeWebcomponentsjs extends HTMLElement {
+    constructor() {
+      super();
+      let template = document.getElementById('element-template');
+      let content = template.content.cloneNode(true);
+      this.attachShadow({mode: 'open'});
+      this.shadowRoot.appendChild(content);
+    }
+  }
+  customElements.define('before-webcomponentsjs', BeforeWebcomponentsjs);
+</script>

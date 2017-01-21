@@ -22,11 +22,11 @@
   "devDependencies": {
     "web-component-tester": "6.0.0-prerelease.3"
   },
-  "_release": "80ab110f6e",
+  "_release": "889ed4f155",
   "_resolution": {
     "type": "branch",
     "branch": "cleanup",
-    "commit": "80ab110f6e456d1a9c01d8ce96e982c3e3dbb9b8"
+    "commit": "889ed4f155d969e8b2b6d03a28b2699ee861b7e4"
   },
   "_source": "git://github.com/webcomponents/html-imports.git",
   "_target": "cleanup",
