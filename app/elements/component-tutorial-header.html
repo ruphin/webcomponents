@@ -10,16 +10,6 @@
   <slot name="title"></slot>
 
   <style>
-    /* Polyfill support */
-    component-tutorial-header {
-      display: flex;
-      flex-flow: row;
-      align-items: center;
-      height: var(--header-height, 56px);
-      background-color: var(--primary-color, #673AB7);
-      box-shadow: 0 2px 5px rgba(0,0,0,.26);
-    }
-
     :host {
       display: flex;
       flex-flow: row;
@@ -29,7 +19,7 @@
       box-shadow: 0 2px 5px rgba(0,0,0,.26);
     }
 
-    slot[name="title"]::slotted(h1) {
+    :host ::slotted(h1) {
       font-size: 18px;
       letter-spacing: .6px;
       font-family: sans-serif;
@@ -37,6 +27,7 @@
       color: var(--primary-text-on-dark-color, rgba(255,255,255,1));
       margin: 0;
     }
+
     #open {
       width: 48px;
       height: 48px;
@@ -79,6 +70,7 @@
       }
     }
   }
+
   customElements.define(ComponentTutorialHeader.is, ComponentTutorialHeader);
 }
 </script>

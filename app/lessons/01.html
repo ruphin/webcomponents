@@ -3,31 +3,31 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
 <link href="/style/main.css" rel="stylesheet">
 
-<template id="code" >
-  <my-element></my-element>
+<template id="code">
+<my-element></my-element>
 
-  <script>
-  class MyElement extends HTMLElement {
-    connectedCallback() {
-      this.innerHTML = "<h1>Hello!</h1><p>I am a custom element</p>";
-    }
+<script>
+class MyElement extends HTMLElement {
+  connectedCallback() {
+    this.innerHTML = "<h1>Hello!</h1><p>I am a custom element</p>";
   }
-  customElements.define('my-element', MyElement);
-  </script>
+}
+customElements.define('my-element', MyElement);
+</script>
 </template>
 
 <component-tutorial-page>
-<h1 slot="header-title">1. Custom Element</h1>
-<div class="content">
-  <p>Something about custom element</p>
-  <pre><code class="prettyprint" id="all"></code></pre>
-  <p>Some more text</p>
-  <pre><code class="prettyprint" id="first"></code></pre>
-  <p>Even more text</p>
-  <pre><code class="prettyprint" id="second"></code></pre>
-</div>
-<a slot="footer-link" class="left" href="/lessons/00.html">0. Introduction</a>
-<a slot="footer-link" class="right" href="/lessons/02.html">2. Templates</a>
+  <h1 slot="header-title">1. Custom Element</h1>
+  <div class="content">
+    <p>Something about custom element</p>
+    <pre><code class="prettyprint" id="all"></code></pre>
+    <p>Some more text</p>
+    <pre><code class="prettyprint" id="first"></code></pre>
+    <p>Even more text</p>
+    <pre><code class="prettyprint" id="second"></code></pre>
+  </div>
+  <a slot="footer-link" class="left" href="/lessons/00.html">0. Introduction</a>
+  <a slot="footer-link" class="right" href="/lessons/02.html">2. Templates</a>
 </component-tutorial-page>
 
 <script src="/vendor/highlightjs/highlight.pack.js"></script>
