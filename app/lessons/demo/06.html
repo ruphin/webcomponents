@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+
+<my-element my-attribute="Do not read attributes in the constructor"></my-element>
+
+<template id="my-element-template">
+  <h1>The Constructor</h1>
+</template>
+
+<script>
+class MyElement extends HTMLElement {
+  // The constructor is called when an instance of our element is created
+  // There are a few rules to what you can do
+  constructor() {
+    // You must call super() before doing anything else
+    super();
+
+    // You can create the shadowRoot in the constructor
+    let template = document.getElementById('my-element-template');
+    let content = template.content.cloneNode(true);
+    this.attachShadow({mode: 'open'});
+    this.shadowRoot.appendChild(content);
+
+    // The constructor has two important rules:
+    // 1. You cannot attach or manipulate your children.
+    //    this.appendChild() or this.innerHTML is NOT allowed
+    //    However, manipulating the shadowRoot is OK
+    // 2. You cannot inspect or modify your attributes.
+    //    Attributes are part of the DOM, and the constructor() is called
+    //    before your element is aware of the DOM, so it won't work
+
+    this.usage = "The constructor is a great place to set default properties"
+    let propertyElement = document.createElement('p');
+    propertyElement.innerText = this.usage;
+    this.shadowRoot.appendChild(propertyElement);
+  }
+  // Do any work with attributes in the connectedCallback
+  connectedCallback() {
+    let attributeString = this.getAttribute('my-attribute');
+    let attributeElement = document.createElement('p');
+    attributeElement.innerText = attributeString;
+    this.shadowRoot.appendChild(attributeElement);
+  }
+}
+
+customElements.define('my-element', MyElement);
+</script>

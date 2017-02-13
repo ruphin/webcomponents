@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+
+<my-element></my-element>
+
+<!-- Define a template for the DOM inside our Template -->
+<template id="my-element-template">
+  <h1>Templates</h1>
+  <p>Because nobody likes innerHTML</p>
+</template>
+
+<script>
+class MyElement extends HTMLElement {
+  connectedCallback() {
+    // Get our Template content, make a copy, and append it to our element
+    let template = document.getElementById('my-element-template');
+    let content = template.content.cloneNode(true);
+    this.appendChild(content);
+  }
+}
+
+customElements.define('my-element', MyElement);
+</script>

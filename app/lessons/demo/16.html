@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+
+<my-element>
+  <p>Text without a <code>&lt;slot&gt;</code> attribute</p>
+  <!-- Define the 'slot' attribute to assign an element to a specific slot -->
+  <button type="button" slot="myButton">A button</button>
+  <p slot="myText">This is inserted in the <code>myText</code> slot</p>
+  <!-- Multiple elements can be placed in the same slot -->
+  <button type="button" slot="myButton">An other button</button>
+</my-element>
+
+<template id="my-element-template">
+  <!-- Define 'name' on a slot element to assign what elements it will slot -->
+  <slot name="myHeader">
+    <!-- The content of the slot is used as a fallback -->
+    <h1>Distributing and styling named nodes</h1>
+  </slot>
+  <!-- Elements are slotted in the first <slot> with matching name -->
+  <slot name="myText">
+    <p>This fallback text will not be rendered</p>
+  </slot>
+  <div>
+    <p><strong>These were in the myButton slot:</strong></p>
+    <!-- <slot> elements can be placed anywhere in the DOM -->
+    <slot name="myButton"></slot>
+  </div>
+  <p><strong>Remaining elements:</strong></p>
+  <!-- An unnamed slot matches all elements -->
+  <slot></slot>
+  <style>
+    /* Slotted elements retain the style they had from the scope where they are defined */
+    ::slotted(p) { /* We can override the style for slotted items like this */
+      color: crimson;
+    }
+    /* You can only style the top element that is slotted */
+    ::slotted(p code),
+    ::slotted(p) code { /* These will not work */
+      color: forestgreen;
+    }
+    /* Fallback elements are not affected by this syntax */
+    ::slotted(h1) { /* This will not style the fallback h1 */
+      color: crimson;
+    }
+    h1 { /* This works for the fallback, but not the slotted element */
+      color: forestgreen;
+    }
+  </style>
+</template>
+
+<script>
+class MyElement extends HTMLElement {
+  constructor() {
+    super();
+    this._attachTemplate();
+  }
+  _attachTemplate() {
+    let template = document.getElementById('my-element-template');
+    let content = template.content.cloneNode(true);
+    this.attachShadow({mode: 'open'});
+    this.shadowRoot.appendChild(content);
+  }
+}
+
+customElements.define('my-element', MyElement);
+</script>
