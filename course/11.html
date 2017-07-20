@@ -15,7 +15,6 @@ class MyElement extends HTMLElement {
     super();
     this._attachTemplate();
     this._createElementCache();
-    this.count = 0;
     this.$.button.onclick = () => { this.count = this.count + 1; };
   }
   connectedCallback() {
@@ -37,10 +36,8 @@ class MyElement extends HTMLElement {
   }
   _createElementCache() {
     this.$ = {};
-    this.shadowRoot.querySelectorAll('*').forEach((element) => {
-      if (element.id) {
-        this.$[element.id] = element;
-      }
+    this.shadowRoot.querySelectorAll('[id]').forEach((element) => {
+      this.$[element.id] = element;
     });
   }
 }
