@@ -29,12 +29,10 @@ class MyElement extends HTMLElement {
   _createElementCache() {
     // Create an ID lookup cache in the $ property
     this.$ = {};
-    // Iterate over all elements in our shadowRoot
-    this.shadowRoot.querySelectorAll('*').forEach((element) => {
-      // Add all elements with an id in to the cache
-      if (element.id) {
-        this.$[element.id] = element;
-      }
+    // Iterate over all elements with an id in our shadowRoot
+    // and ddd them to the cache
+    this.shadowRoot.querySelectorAll('[id]').forEach((element) => {
+      this.$[element.id] = element;
     });
   }
 }

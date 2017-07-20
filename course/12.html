@@ -15,10 +15,9 @@ class MyElement extends HTMLElement {
     super();
     this._attachTemplate();
     this._createElementCache();
-    this.count = 0;
     this.$.button.onclick = () => { this.count = this.count + 1; };
   }
-  // Define a static class property that tells defines what attributes we want to watch
+  // Define a static class property which defines what attributes we want to watch
   static get observedAttributes() {
     // Return an array of attribute names
     return ['count'];
@@ -47,10 +46,8 @@ class MyElement extends HTMLElement {
   }
   _createElementCache() {
     this.$ = {};
-    this.shadowRoot.querySelectorAll('*').forEach((element) => {
-      if (element.id) {
-        this.$[element.id] = element;
-      }
+    this.shadowRoot.querySelectorAll('[id]').forEach((element) => {
+      this.$[element.id] = element;
     });
   }
 }
