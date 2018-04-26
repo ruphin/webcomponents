@@ -3,14 +3,15 @@
 <my-element></my-element>
 
 <script>
-// Extend an HTMLElement or another custom element
-class MyElement extends HTMLElement {
-  // This is called when our element is attached to the DOM
-  connectedCallback() {
-    this.innerHTML = "<h1>Hello!</h1><p>I am a custom element</p>";
+  // Extend an HTMLElement or another custom element
+  class MyElement extends HTMLElement {
+    // This is called when our element is attached to the DOM
+    connectedCallback() {
+      this.innerHTML = `<h1>Hello!</h1><p>I am a custom element</p>`;
+    }
   }
-}
 
-// Tell the browser to create an instance of MyElement when it parses the '<my-element>' tag
-customElements.define('my-element', MyElement);
+  // Tell the browser to associate the '<my-element>' tag
+  // with our MyElement class
+  customElements.define('my-element', MyElement);
 </script>
