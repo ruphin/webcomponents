@@ -1,0 +1,15 @@
+{
+  "name": "web-component-course",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "docker": "npm run build && docker build -t ruphin/proxy .",
+    "docker:push": "npm run docker && docker push ruphin/proxy"
+  },
+  "devDependencies": {
+    "vite": "^8.3.3"
+  }
+}

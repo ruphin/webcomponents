@@ -34,20 +34,46 @@ import createTheme from "spectacle/lib/themes/default";
 // Import custom component
 import Interactive from "../assets/interactive";
 
-// Require CSS
-require("normalize.css");
-require("spectacle/lib/themes/default/index.css");
+// Import images
+import partyImage from "../assets/party.gif";
+import whatDoesItMeanImage from "../assets/what-does-it-mean.gif";
+import browsersImage from "../assets/browsers.gif";
+import howImage from "../assets/how.gif";
+import shadowImage from "../assets/shadow.gif";
+import dataflowImage from "../assets/dataflow.jpg";
+import gloryImage from "../assets/glory.gif";
+import holdOnImage from "../assets/hold-on.gif";
+
+// Import code samples
+import code1 from "../assets/code/1.html?raw";
+import code2 from "../assets/code/2.html?raw";
+import code3 from "../assets/code/3.html?raw";
+import code4 from "../assets/code/4.html?raw";
+import code5 from "../assets/code/5.html?raw";
+import code6 from "../assets/code/6.html?raw";
+import code7 from "../assets/code/7.html?raw";
+import code8 from "../assets/code/8.html?raw";
+import code9 from "../assets/code/9.html?raw";
+import code10 from "../assets/code/10.html?raw";
+import code11 from "../assets/code/11.html?raw";
+import code12 from "../assets/code/12.html?raw";
+import code15 from "../assets/code/15.html?raw";
+import code18 from "../assets/code/18.html?raw";
+
+// Import CSS
+import "normalize.css";
+import "spectacle/lib/themes/default/index.css";
 
 
 const images = {
-  party: require("../assets/party.gif"),
-  whatDoesItMean: require("../assets/what-does-it-mean.gif"),
-  browsers: require("../assets/browsers.gif"),
-  how: require("../assets/how.gif"),
-  shadow: require("../assets/shadow.gif"),
-  dataflow: require("../assets/dataflow.jpg"),
-  glory: require("../assets/glory.gif"),
-  holdOn: require("../assets/hold-on.gif")
+  party: partyImage,
+  whatDoesItMean: whatDoesItMeanImage,
+  browsers: browsersImage,
+  how: howImage,
+  shadow: shadowImage,
+  dataflow: dataflowImage,
+  glory: gloryImage,
+  holdOn: holdOnImage
 };
 
 preloader(images);
@@ -108,7 +134,7 @@ export default class Presentation extends React.Component {
               <div>
                 <CodePane
                   lang="html"
-                  source={require("raw!../assets/code/1.html")}
+                  source={code1}
                   margin="20px auto"
                 />
                 <Text textColor="white" textSize="250%" caps lineHeight={2}>This elegant</Text>
@@ -134,7 +160,7 @@ export default class Presentation extends React.Component {
             padding="0"
             transition={["slide"]}
             lang="html"
-            code={require("raw!../assets/code/1.html")}
+            code={code1}
             ranges={[
               { loc: [0, 13], note: "Use Up and Down keys to navigate code slides"},
               { loc: [0, 1], note: "Standard HTML"},
@@ -154,7 +180,7 @@ export default class Presentation extends React.Component {
             padding="0"
             transition={["slide"]}
             lang="html"
-            code={require("raw!../assets/code/2.html")}
+            code={code2}
             ranges={[
               { loc: [0, 20], note: "Let's get rid of that innerHTML" },
               { loc: [4, 8], note: "We define a template for our content" },
@@ -172,7 +198,7 @@ export default class Presentation extends React.Component {
             padding="0"
             transition={["slide"]}
             lang="html"
-            code={require("raw!../assets/code/3.html")}
+            code={code3}
             ranges={[
               { loc: [0, 16], note: "Styling is easy"},
               { loc: [9, 14], note: "Use normal CSS" },
@@ -195,7 +221,7 @@ export default class Presentation extends React.Component {
             padding="0"
             transition={["slide"]}
             lang="html"
-            code={require("raw!../assets/code/4.html")}
+            code={code4}
             ranges={[
               { loc: [6, 15], note: "ShadowDOM encapsulates our styles within our element"},
               { loc: [18, 24], note: "We just have to change our connectedCallback a little" },
@@ -211,7 +237,7 @@ export default class Presentation extends React.Component {
             padding="0"
             transition={["slide"]}
             lang="html"
-            code={require("raw!../assets/code/5.html")}
+            code={code5}
             ranges={[
               { loc: [4, 9], note: "Properties and Attributes"},
               { loc: [25, 26], note: "Properties are like instance variables"},
@@ -225,7 +251,7 @@ export default class Presentation extends React.Component {
             padding="0"
             transition={["slide"]}
             lang="html"
-            code={require("raw!../assets/code/6.html")}
+            code={code6}
             ranges={[
               { loc: [10, 23], note: "The Constructor"},
               { loc: [9, 11], note: "We use normal ES6 Classes, so we can also use the constructor()"},
@@ -243,7 +269,7 @@ export default class Presentation extends React.Component {
             padding="0"
             transition={["slide"]}
             lang="html"
-            code={require("raw!../assets/code/7.html")}
+            code={code7}
             ranges={[
               { loc: [0, 14], note: "Additional styling"},
               { loc: [8, 14], note: "In your stylesheet, the :host selector refers to your element itself"},
@@ -266,7 +292,7 @@ export default class Presentation extends React.Component {
             padding="0"
             transition={["slide"]}
             lang="html"
-            code={require("raw!../assets/code/8.html")}
+            code={code8}
             ranges={[
               { loc: [0, 17], note: "Let's do some more advanced stuff"},
               { loc: [4, 9], note: "We want a nice way to access our internal elements with an ID"},
@@ -285,7 +311,7 @@ export default class Presentation extends React.Component {
             padding="0"
             transition={["slide"]}
             lang="html"
-            code={require("raw!../assets/code/9.html")}
+            code={code9}
             ranges={[
               { loc: [0, 17], note: "State Management"},
               { loc: [4, 9], note: "Lets say we have some state that we need to reflect in an internal component"},
@@ -305,7 +331,7 @@ export default class Presentation extends React.Component {
             padding="0"
             transition={["slide"]}
             lang="html"
-            code={require("raw!../assets/code/10.html")}
+            code={code10}
             ranges={[
               { loc: [0, 17], note: "We can use this for 'data-binding'"},
               { loc: [4, 9], note: "Lets say we want to make a simple counter"},
@@ -322,7 +348,7 @@ export default class Presentation extends React.Component {
             padding="0"
             transition={["slide"]}
             lang="html"
-            code={require("raw!../assets/code/11.html")}
+            code={code11}
             ranges={[
               { loc: [0, 17], note: "Attributes are useful to semantically set our initial state"},
               { loc: [2, 3], note: "We want our element to be configurable from HTML"},
@@ -336,7 +362,7 @@ export default class Presentation extends React.Component {
             padding="0"
             transition={["slide"]}
             lang="html"
-            code={require("raw!../assets/code/12.html")}
+            code={code12}
             ranges={[
               { loc: [0, 17], note: "We can also observe changes to our attribute"},
               { loc: [19, 22], note: "We have to tell the browser what attributes we want to observe"},
@@ -352,7 +378,7 @@ export default class Presentation extends React.Component {
             padding="0"
             transition={["slide"]}
             lang="html"
-            code={require("raw!../assets/code/15.html")}
+            code={code15}
             ranges={[
               { loc: [0, 17], note: "Distributing child nodes"},
               { loc: [2, 5], note: "Sometimes we want our elements to carry child nodes"},
@@ -376,7 +402,7 @@ export default class Presentation extends React.Component {
             padding="0"
             transition={["slide"]}
             lang="html"
-            code={require("raw!../assets/code/18.html")}
+            code={code18}
             ranges={[
               { loc: [0, 17], note: "Two nested elements"},
               { loc: [51, 60], note: "When a property is set, update our bindings, reflect to our attribute, and fire an event"},
